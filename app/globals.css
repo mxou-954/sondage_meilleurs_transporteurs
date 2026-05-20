@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg:       #08080E;
+    --bg2:      #0E0E18;
+    --bg3:      #141420;
+    --gold:     #C8A96E;
+    --gold2:    #E2C98A;
+    --gold3:    #F0DFB0;
+    --goldfade: rgba(200,169,110,0.18);
+    --goldline: rgba(200,169,110,0.22);
+    --text:     #F0EDE8;
+    --text2:    #A8A4B8;
+    --text3:    #6A677A;
+    --red:      #C0392B;
+    --serif:    'Playfair Display', Georgia, serif;
+    --sans:     'Inter', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  input { font-family: var(--sans); }
+  input:focus { outline: none; }
+  button { font-family: var(--sans); border: none; cursor: pointer; }
+  a { text-decoration: none; color: inherit; }
+}
+
+@layer utilities {
+  .serif { font-family: var(--serif); }
+
+  .gold-text {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 45%, var(--gold3) 60%, var(--gold2) 75%, var(--gold) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShine 5s ease-in-out infinite;
+  }
+
+  .divider-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+  }
+}
+
+@keyframes goldShine {
+  0%, 100% { background-position: 0% center; }
+  50%       { background-position: 100% center; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Noise */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.018; pointer-events: none; z-index: 9999;
+}
