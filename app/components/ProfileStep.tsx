@@ -8,7 +8,7 @@ type Props = { onSelect: (p: Profile) => void; onBack: () => void };
 export default function ProfileStep({ onSelect, onBack }: Props) {
   return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
-      <TopBar step="1 / 6" onBack={onBack} />
+      <TopBar step="1 / 3" onBack={onBack} />
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 20px 40px" }}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ width: "100%", maxWidth: 600 }}>
@@ -31,14 +31,14 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
                 title: "Professionnel",
                 subtitle: "Transport & Logistique",
                 desc: "Responsable transport, acheteur, supply chain, consultant…",
-                tags: ["Express France", "International", "B2C", "Palette & Fret"],
+                tags: ["Livraison", "Retours", "Suivi", "Service client"],
               },
               {
                 id: "client" as Profile,
-                icon: "📦",
-                title: "Expéditeur",
+                icon: "🙎‍♂️",
+                title: "Particulier",
                 subtitle: "Client & Particulier",
-                desc: "Vous expédiez ou recevez des colis régulièrement.",
+                desc: "Vous recevez ou expédiez des colis régulièrement.",
                 tags: ["Livraison domicile", "Retours", "Suivi", "Service client"],
               },
             ] as const).map((p, i) => (
@@ -70,7 +70,7 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
                   ))}
                 </div>
                 <div style={{ marginTop: 24, fontSize: 12, color: "var(--gold)", letterSpacing: "0.08em" }}>
-                  4 questions · ~3 min →
+                  1 question · ~1 min →
                 </div>
               </motion.button>
             ))}

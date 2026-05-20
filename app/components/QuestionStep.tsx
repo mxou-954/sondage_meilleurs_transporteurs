@@ -20,7 +20,7 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
   return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
       <TopBar
-        step={`${qIndex + 3} / ${total + 2}`}
+        step={`Question ${qIndex + 1}`}
         onBack={onBack}
         progress={progress}
       />
@@ -32,7 +32,7 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
           {/* Category badge */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <p style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 10 }}>
-              Question {qIndex + 1} sur {total} — {question.label}
+              {question.label}
             </p>
             <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
               {question.text}
@@ -107,16 +107,6 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
               );
             })}
           </div>
-
-          {/* Je ne sais pas link */}
-          <button
-            onClick={() => onVote(question.id, null)}
-            style={{ marginTop: 20, background: "none", border: "none", color: "var(--text3)", fontSize: 12, cursor: "pointer", letterSpacing: "0.06em", display: "block", textAlign: "center", width: "100%", padding: "8px" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "var(--text2)")}
-            onMouseLeave={e => (e.currentTarget.style.color = "var(--text3)")}
-          >
-            Je ne sais pas — passer cette question
-          </button>
         </div>
       </div>
 

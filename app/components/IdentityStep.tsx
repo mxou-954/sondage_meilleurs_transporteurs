@@ -19,8 +19,10 @@ export default function IdentityStep({ profile, onNext, onBack }: Props) {
   const [company, setCompany] = useState("");
   const [error,   setError]   = useState("");
   const [focused, setFocused] = useState<string | null>(null);
+  const [cgu, setCgu] = useState(false);
 
   const validate = () => {
+    if (!cgu) { setError("Veuillez accepter les conditions d'utilisation."); return false; }
     if (!name.trim())          { setError("Votre nom est requis."); return false; }
     if (!email.includes("@"))  { setError("Adresse email invalide."); return false; }
     if (isPro) {
@@ -41,13 +43,13 @@ export default function IdentityStep({ profile, onNext, onBack }: Props) {
 
   return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
-      <TopBar step="2 / 6" onBack={onBack} progress={16} />
+      <TopBar step="3 / 3" onBack={onBack} progress={66} />
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "88px 20px 40px" }}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ width: "100%", maxWidth: 440 }}>
 
           <p style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold)", textAlign: "center", marginBottom: 10 }}>
-            Étape 2 — {isPro ? "Professionnel" : "Expéditeur"}
+            Étape 3 — {isPro ? "Professionnel" : "Expéditeur"}
           </p>
           <h2 className="serif" style={{ fontSize: "clamp(1.8rem,5vw,2.8rem)", fontWeight: 400, textAlign: "center", color: "var(--text)", marginBottom: 6 }}>
             Qui êtes-vous ?
@@ -57,6 +59,8 @@ export default function IdentityStep({ profile, onNext, onBack }: Props) {
             {isPro
               ? "Votre email pro garantit l'intégrité du vote — un vote par adresse."
               : "Un vote par adresse email. Vos données ne seront pas revendues."}
+              <br></br>
+              Les votes sont anonymisé 
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -93,6 +97,37 @@ export default function IdentityStep({ profile, onNext, onBack }: Props) {
               </motion.p>
             )}
 
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+
+            <div
+                onClick={() => setCgu(!cgu)}
+                style={{
+                  flexShrink: 0, width: 18, height: 18, borderRadius: 2, marginTop: 1,
+                  border: `1.5px solid ${cgu ? "var(--gold)" : "rgba(255,255,255,0.2)"}`,
+                  background: cgu ? "var(--gold)" : "transparent",
+                  cursor: "pointer", transition: "all 0.15s",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                {cgu && (
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                    <path d="M1 4L3.5 6.5L9 1" stroke="#08080E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </div>
+              <p style={{ fontSize: 12, color: "var(--text3)", lineHeight: 1.6, cursor: "pointer" }} onClick={() => setCgu(!cgu)}>
+                J'accepte les{" "}
+                <a href="/cgu" target="_blank" style={{ color: "var(--gold)", textDecoration: "underline" }}>
+                  conditions d'utilisation
+                </a>{" "}
+                et la{" "}
+                <a href="/confidentialite" target="_blank" style={{ color: "var(--gold)", textDecoration: "underline" }}>
+                  politique de confidentialité
+                </a>
+                . Mes données sont utilisées uniquement dans le cadre de ce vote.
+              </p>
+            </div>
+
             <button
               onClick={handleNext}
               style={{
@@ -106,7 +141,7 @@ export default function IdentityStep({ profile, onNext, onBack }: Props) {
               onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
               onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
             >
-              Commencer le vote →
+              Valider mon vote →
             </button>
 
             <p style={{ fontSize: 11, textAlign: "center", color: "var(--text3)" }}>

@@ -50,7 +50,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
         borderBottom: "1px solid rgba(200,169,110,0.1)",
       }}>
         <span style={{ fontFamily: "var(--serif)", fontSize: 15, color: "var(--gold)", letterSpacing: "0.12em" }}>
-          COLISCONSULT
+          Mon transporteur préféré
         </span>
         <a href="https://www.colisconsult.com" target="_blank" rel="noopener noreferrer"
           style={{ fontSize: 12, color: "var(--text3)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
@@ -106,12 +106,9 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
           className="serif"
           style={{ fontSize: "clamp(2.6rem, 8vw, 6rem)", lineHeight: 1.0, fontWeight: 400, marginBottom: 12 }}
         >
-          <span style={{ color: "var(--text)" }}>Meilleur</span>{" "}
-          <span className="gold-text" style={{ fontStyle: "italic" }}>Transporteur</span>
+          <span style={{ color: "var(--text)" }}>Mon transporteur</span>{" "}
+          <span className="gold-text" style={{ fontStyle: "italic" }}>préféré</span>
           <br />
-          <span style={{ color: "var(--text)", fontSize: "0.55em", fontWeight: 300, letterSpacing: "0.08em" }}>
-            de l&apos;Année 2026
-          </span>
         </motion.h1>
 
         {/* Divider */}
@@ -221,8 +218,8 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
           {[
-            { n: "01", icon: "👤", title: "Votre profil", desc: "Choisissez entre professionnel du transport ou expéditeur. Les questions s'adaptent." },
-            { n: "02", icon: "🗳️", title: "4 questions", desc: "Pour chaque catégorie, sélectionnez le transporteur qui vous paraît le meilleur." },
+            { n: "01", icon: "👤", title: "Votre profil", desc: "Choisissez entre professionnel du transport ou expéditeur." },
+            { n: "02", icon: "🗳️", title: "1 question", desc: "Sélectionnez le transporteur qui vous paraît le meilleur." },
             { n: "03", icon: "🏆", title: "Résultats", desc: "Le palmarès est annoncé le 10 juillet 2026 et partagé à tous les votants." },
           ].map((s, i) => (
             <motion.div

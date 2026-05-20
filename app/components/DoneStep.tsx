@@ -5,7 +5,7 @@ import { Question } from "@/app/data/transporteurs";
 
 type Votes = Record<string, string>;
 
-export default function DoneStep({ votes, questions, name }: { votes: Votes; questions: Question[]; name: string }) {
+export default function DoneStep({ votes, questions, name, profile, alreadyVoted }: { votes: Votes; questions: Question[]; name: string; profile: string; alreadyVoted: boolean }) {
   const [copied, setCopied] = useState(false);
   const [showShare, setShowShare] = useState(false);
 
@@ -95,6 +95,14 @@ export default function DoneStep({ votes, questions, name }: { votes: Votes; que
             })}
           </motion.div>
         )}
+        
+        { alreadyVoted && (
+          <div style={{ padding: "12px 16px", borderRadius: 4, background: "rgba(192,57,43,0.1)", border: "1px solid rgba(192,57,43,0.3)", marginBottom: 20 }}>
+            <p style={{ fontSize: 13, color: "#e74c3c" }}>
+              ⚠ Un vote a déjà été enregistré avec cette adresse email.
+            </p>
+          </div>
+        )}
 
         {/* Share section */}
         {showShare && (
@@ -181,6 +189,40 @@ export default function DoneStep({ votes, questions, name }: { votes: Votes; que
             </div>
 
             <div className="divider-gold" style={{ margin: "32px auto" }} />
+
+            {profile === "pro" && (
+              <div style={{
+                margin: "24px 0",
+                padding: "20px 24px",
+                background: "rgba(200,169,110,0.06)",
+                border: "1px solid rgba(200,169,110,0.2)",
+                borderRadius: 4,
+                textAlign: "left",
+              }}>
+                <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.75, marginBottom: 16 }}>
+                  💡 <strong style={{ color: "var(--text)" }}>Besoin de renégocier vos contrats transport ?</strong>
+                  <br />
+                  ColisConsult vous accompagne pour réduire vos coûts de 3 à 22%, paiement 100% au résultat.
+                </p>
+                <a
+                  href="https://calendly.com/matthieu-erly"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: 8,
+                    padding: "12px 20px", borderRadius: 4,
+                    background: "linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%)",
+                    color: "var(--bg)", fontSize: 12, fontWeight: 600,
+                    letterSpacing: "0.12em", textTransform: "uppercase",
+                    transition: "opacity 0.15s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                >
+                  📅 Prendre rendez-vous avec Matthieu →
+                </a>
+              </div>
+            )}
 
             <a
               href="https://www.colisconsult.com"

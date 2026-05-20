@@ -22,6 +22,7 @@ export default function App() {
   const [email,    setEmail]    = useState("");
   const [company,  setCompany]  = useState("");
   const [votes,    setVotes]    = useState<Votes>({});
+  const [alreadyVoted, setAlreadyVoted] = useState(false);
 
   const questions: Question[] = profile === "pro" ? QUESTIONS_PRO : QUESTIONS_CLIENT;
 
@@ -36,8 +37,8 @@ export default function App() {
     const onPop = () => {
       // Map current step to previous
       if (step === "profile")  { setDir(-1); setPrev(step); setStep("home"); }
-      else if (step === "identity") { setDir(-1); setPrev(step); setStep("profile"); }
-      else if (step === "q0")  { setDir(-1); setPrev(step); setStep("identity"); }
+      else if (step === "q0")       { setDir(-1); setPrev(step); setStep("profile"); }
+      else if (step === "identity") { setDir(-1); setPrev(step); setStep("q0"); }
       else if (step.startsWith("q")) {
         const idx = parseInt(step.slice(1));
         if (idx > 0) { setDir(-1); setPrev(step); setStep(`q${idx - 1}` as StepName); }
@@ -57,19 +58,13 @@ export default function App() {
     const newVotes = { ...votes };
     if (tId) newVotes[qId] = tId; else delete newVotes[qId];
     setVotes(newVotes);
-    const idx = parseInt(step.slice(1));
-    const next = idx + 1;
-    if (next < questions.length) go(`q${next}` as StepName, 1);
-    else {
-      submitVotes(newVotes, email, name, company, profile);
-      go("done", 1);
-    }
+    go("identity", 1); // ← au lieu de done
   };
 
   const goBack = () => {
-    if (step === "profile")  go("home", -1);
-    else if (step === "identity") go("profile", -1);
-    else if (step === "q0")  go("identity", -1);
+    if (step === "profile")       go("home", -1);
+    else if (step === "q0")       go("profile", -1);
+    else if (step === "identity") go("q0", -1);
     else if (step.startsWith("q")) {
       const idx = parseInt(step.slice(1));
       if (idx > 0) go(`q${idx - 1}` as StepName, -1);
@@ -104,7 +99,7 @@ export default function App() {
             initial="enter" animate="center" exit="exit" transition={transition}
             style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
             <ProfileStep
-              onSelect={p => { setProfile(p); go("identity", 1); }}
+              onSelect={p => { setProfile(p); go("q0", 1); }}
               onBack={() => go("home", -1)}
             />
           </motion.div>
@@ -116,7 +111,15 @@ export default function App() {
             style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
             <IdentityStep
               profile={profile}
-              onNext={(n, em, co) => { setName(n); setEmail(em); setCompany(co); go("q0", 1); }}
+              onNext={async (n, em, co) => {
+                setName(n); setEmail(em); setCompany(co);
+                const result = await submitVotes(votes, em, n, co, profile);
+                if (result === "already_voted") {
+                  // Passer l'info à DoneStep
+                  setAlreadyVoted(true);
+                }
+                go("done", 1);
+              }}
               onBack={() => go("profile", -1)}
             />
           </motion.div>
@@ -141,7 +144,7 @@ export default function App() {
           <motion.div key="done" custom={dir} variants={variants}
             initial="enter" animate="center" exit="exit" transition={transition}
             style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
-            <DoneStep votes={votes} questions={questions} name={name} />
+            <DoneStep votes={votes} questions={questions} name={name} profile={profile} alreadyVoted={alreadyVoted}/>
           </motion.div>
         )}
 
@@ -152,10 +155,14 @@ export default function App() {
 
 async function submitVotes(votes: Votes, email: string, name: string, company: string, profile: Profile) {
   try {
-    await fetch("/api/vote", {
+    const res = await fetch("/api/vote", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, name, company, profile, votes }),
     });
+    if (res.status === 409) {
+      // Email déjà utilisé — on va quand même sur done mais on peut afficher un message
+      return "already_voted";
+    }
   } catch {}
 }
