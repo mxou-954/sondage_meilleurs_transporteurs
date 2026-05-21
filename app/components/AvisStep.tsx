@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Question } from "@/app/data/transporteurs";
 import TopBar from "./TopBar";
@@ -24,7 +24,11 @@ export default function AvisStep({ question, votedId, onNext, onSkip, onBack }: 
   const [avis, setAvis] = useState<Avis>({});
 
   // Exclude the one they voted for
-  const transporteurs = question.transporteurs.filter(t => t.id !== votedId);
+  const transporteurs = useMemo(() => {
+    return [...question.transporteurs]
+      .filter(t => t.id !== votedId)
+      .sort(() => Math.random() - 0.5);
+  }, [question.id, votedId]);
 
   const toggle = (tId: string, key: "good" | "neutral" | "bad") => {
     setAvis(prev => {

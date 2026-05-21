@@ -182,6 +182,7 @@ export default function App() {
               profile={profile}
               alreadyVoted={alreadyVoted}
               onRestartAsClient={restartAsClient}
+              avis={avis}
             />
           </motion.div>
         )}

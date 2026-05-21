@@ -37,7 +37,7 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
                 id: "client" as Profile,
                 icon: "🙎‍♂️",
                 title: "Particulier",
-                subtitle: "Client & Particulier",
+                subtitle: "Particulier",
                 desc: "Vous recevez ou expédiez des colis régulièrement.",
                 tags: ["Livraison domicile", "Retours", "Suivi", "Service client"],
               },

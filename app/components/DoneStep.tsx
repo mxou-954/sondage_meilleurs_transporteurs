@@ -12,9 +12,10 @@ type Props = {
   profile: string;
   alreadyVoted?: boolean;
   onRestartAsClient?: () => void;
+  avis?: Record<string, "good" | "neutral" | "bad">;
 };
 
-export default function DoneStep({ votes, questions, name, profile, alreadyVoted, onRestartAsClient }: Props) {
+export default function DoneStep({ votes, questions, name, profile, alreadyVoted, onRestartAsClient, avis }: Props) {
   const [copied, setCopied] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -55,7 +56,8 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
 
       {/* Nav */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", borderBottom: "1px solid rgba(200,169,110,0.08)", background: "rgba(8,8,14,0.9)", backdropFilter: "blur(16px)" }}>
-        <span style={{ fontFamily: "var(--serif)", fontSize: 14, color: "var(--gold)", letterSpacing: "0.12em" }}>COLISCONSULT</span>
+        <span style={{ fontFamily: "var(--serif)", fontSize: 14, color: "var(--gold)", letterSpacing: "0.12em" }}>Mon transporteur préféré</span>
+        <span> By ColisConsult</span>
       </div>
 
       {/* ── LAYOUT: two columns on desktop, stack on mobile ── */}
@@ -114,6 +116,32 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
                   }}>
                     <span style={{ fontSize: 12, color: "var(--text3)" }}>{q.label}</span>
                     <span className="serif" style={{ fontSize: 13, color: "var(--gold2)" }}>{t?.nom}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {/* Avis recap */}
+          {avis && Object.keys(avis).length > 0 && (
+            <div style={{ borderRadius: 4, overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", marginTop: 8 }}>
+              <div style={{ padding: "8px 16px", background: "rgba(255,255,255,0.02)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                <span style={{ fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--text3)" }}>
+                  Vos avis
+                </span>
+              </div>
+              {Object.entries(avis).map(([tId, sentiment], i) => {
+                const transporteur = questions.flatMap(q => q.transporteurs).find(t => t.id === tId);
+                const emoji = sentiment === "good" ? "😊" : sentiment === "neutral" ? "😐" : "😞";
+                const entries = Object.entries(avis);
+                return (
+                  <div key={tId} style={{
+                    display: "flex", alignItems: "center", justifyContent: "space-between",
+                    padding: "10px 16px",
+                    background: i % 2 === 0 ? "var(--bg2)" : "rgba(255,255,255,0.01)",
+                    borderBottom: i < entries.length - 1 ? "1px solid rgba(255,255,255,0.03)" : "none",
+                  }}>
+                    <span style={{ fontSize: 12, color: "var(--text3)" }}>{transporteur?.nom ?? tId}</span>
+                    <span style={{ fontSize: 18 }}>{emoji}</span>
                   </div>
                 );
               })}

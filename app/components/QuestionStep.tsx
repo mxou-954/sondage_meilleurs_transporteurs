@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Question } from "@/app/data/transporteurs";
 import TopBar from "./TopBar";
@@ -16,6 +16,10 @@ type Props = {
 export default function QuestionStep({ question, qIndex, total, savedVote, onVote, onBack }: Props) {
   const [selected, setSelected] = useState<string | null>(savedVote);
   const progress = Math.round(((qIndex + 1) / (total + 3)) * 100) + 30; // offset for profile+identity steps
+
+  const shuffled = useMemo(() => {
+    return [...question.transporteurs].sort(() => Math.random() - 0.5);
+  }, [question.id]);
 
   return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
@@ -42,7 +46,7 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
 
           {/* Transporteur list */}
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {question.transporteurs.map((t, i) => {
+            {shuffled.map((t, i) => {
               const isSelected = selected === t.id;
               return (
                 <motion.button
