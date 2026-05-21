@@ -7,11 +7,13 @@ import IdentityStep from "./IdentityStep";
 import QuestionStep from "./QuestionStep";
 import DoneStep    from "./DoneStep";
 import { QUESTIONS_PRO, QUESTIONS_CLIENT, Question } from "@/app/data/transporteurs";
+import AvisStep from "./AvisStep";
 
+type Avis = Record<string, "good" | "neutral" | "bad">;
 export type Profile = "pro" | "client";
 type Votes = Record<string, string>;
 
-type StepName = "home" | "profile" | "identity" | `q${number}` | "done";
+type StepName = "home" | "profile" | "identity" | `q${number}` | "avis" | "done";
 
 export default function App() {
   const [step,     setStep]     = useState<StepName>("home");
@@ -23,6 +25,7 @@ export default function App() {
   const [company,  setCompany]  = useState("");
   const [votes,    setVotes]    = useState<Votes>({});
   const [alreadyVoted, setAlreadyVoted] = useState(false);
+  const [avis, setAvis] = useState<Avis>({});
 
   const questions: Question[] = profile === "pro" ? QUESTIONS_PRO : QUESTIONS_CLIENT;
 
@@ -38,7 +41,8 @@ export default function App() {
       // Map current step to previous
       if (step === "profile")  { setDir(-1); setPrev(step); setStep("home"); }
       else if (step === "q0")       { setDir(-1); setPrev(step); setStep("profile"); }
-      else if (step === "identity") { setDir(-1); setPrev(step); setStep("q0"); }
+      else if (step === "avis")     { setDir(-1); setPrev(step); setStep("q0"); }
+      else if (step === "identity") { setDir(-1); setPrev(step); setStep("avis"); }
       else if (step.startsWith("q")) {
         const idx = parseInt(step.slice(1));
         if (idx > 0) { setDir(-1); setPrev(step); setStep(`q${idx - 1}` as StepName); }
@@ -54,17 +58,30 @@ export default function App() {
     window.history.pushState({ step }, "", window.location.pathname);
   }, [step]);
 
+  const restartAsClient = () => {
+    setProfile("client");
+    setVotes({});
+    setAvis({});
+    setName("");
+    setEmail("");
+    setCompany("");
+    setAlreadyVoted(false);
+    go("q0", 1);
+  };
+
+
   const handleVote = (qId: string, tId: string | null) => {
     const newVotes = { ...votes };
     if (tId) newVotes[qId] = tId; else delete newVotes[qId];
     setVotes(newVotes);
-    go("identity", 1); // ← au lieu de done
+    go("avis", 1);
   };
 
   const goBack = () => {
     if (step === "profile")       go("home", -1);
     else if (step === "q0")       go("profile", -1);
-    else if (step === "identity") go("q0", -1);
+    else if (step === "identity") go("avis", -1);
+    else if (step === "avis")     go("q0", -1);
     else if (step.startsWith("q")) {
       const idx = parseInt(step.slice(1));
       if (idx > 0) go(`q${idx - 1}` as StepName, -1);
@@ -113,7 +130,7 @@ export default function App() {
               profile={profile}
               onNext={async (n, em, co) => {
                 setName(n); setEmail(em); setCompany(co);
-                const result = await submitVotes(votes, em, n, co, profile);
+                const result = await submitVotes(votes, em, n, co, profile, avis);
                 if (result === "already_voted") {
                   // Passer l'info à DoneStep
                   setAlreadyVoted(true);
@@ -121,6 +138,20 @@ export default function App() {
                 go("done", 1);
               }}
               onBack={() => go("profile", -1)}
+            />
+          </motion.div>
+        )}
+
+        {step === "avis" && (
+          <motion.div key="avis" custom={dir} variants={variants}
+            initial="enter" animate="center" exit="exit" transition={transition}
+            style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
+            <AvisStep
+              question={questions[0]}
+              votedId={votes[questions[0].id] ?? null}
+              onNext={a => { setAvis(a); go("identity", 1); }}
+              onSkip={() => go("identity", 1)}
+              onBack={() => go("q0", -1)}
             />
           </motion.div>
         )}
@@ -144,7 +175,14 @@ export default function App() {
           <motion.div key="done" custom={dir} variants={variants}
             initial="enter" animate="center" exit="exit" transition={transition}
             style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
-            <DoneStep votes={votes} questions={questions} name={name} profile={profile} alreadyVoted={alreadyVoted}/>
+            <DoneStep
+              votes={votes}
+              questions={questions}
+              name={name}
+              profile={profile}
+              alreadyVoted={alreadyVoted}
+              onRestartAsClient={restartAsClient}
+            />
           </motion.div>
         )}
 
@@ -153,12 +191,12 @@ export default function App() {
   );
 }
 
-async function submitVotes(votes: Votes, email: string, name: string, company: string, profile: Profile) {
+async function submitVotes(votes: Votes, email: string, name: string, company: string, profile: Profile, avis?: Avis) {
   try {
     const res = await fetch("/api/vote", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, name, company, profile, votes }),
+      body: JSON.stringify({ email, name, company, profile, votes, avis }),
     });
     if (res.status === 409) {
       // Email déjà utilisé — on va quand même sur done mais on peut afficher un message
