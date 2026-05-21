@@ -269,9 +269,12 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
       }}>
         <span className="serif" style={{ fontSize: 13, color: "var(--gold)", letterSpacing: "0.12em" }}>COLISCONSULT</span>
         <span style={{ fontSize: 11, color: "var(--text3)" }}>© 2026 · Tous droits réservés</span>
-        <div style={{ display: "flex", gap: 20, marginTop: 4 }}>
-          <a href="https://www.colisconsult.com/mentions-legales/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: "var(--text3)" }}>Mentions légales</a>
+        <div style={{ display: "flex", gap: 20, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
+          <a href="/mentions-legales" style={{ fontSize: 11, color: "var(--text3)" }}>Mentions légales</a>
+          <a href="/cgu" style={{ fontSize: 11, color: "var(--text3)" }}>CGU</a>
+          <a href="/confidentialite" style={{ fontSize: 11, color: "var(--text3)" }}>Confidentialité</a>
           <a href="https://fr.linkedin.com/company/colisconsult" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: "var(--text3)" }}>LinkedIn</a>
+          <a href="https://www.colisconsult.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: "var(--text3)" }}>colisconsult.com</a>
         </div>
       </footer>
     </div>
