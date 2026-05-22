@@ -32,7 +32,7 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
   const voted = questions.filter(q => votes[q.id]);
 
   const siteUrl = "https://vote.colisconsult.com";
-  const shareText = `Je viens de voter pour le Best Carrier Award 🏆\nL'élection du meilleur transporteur de l'année par ColisConsult.\nVotez aussi : ${siteUrl}`;
+  const shareText = `Je viens de voter pour le meilleur transporteur 🏆\nL'élection du meilleur transporteur par ColisConsult.\nVotez aussi : ${siteUrl}`;
   const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(siteUrl)}`;
 
   const copyLink = async () => {
@@ -57,7 +57,6 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
       {/* Nav */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", borderBottom: "1px solid rgba(200,169,110,0.08)", background: "rgba(8,8,14,0.9)", backdropFilter: "blur(16px)" }}>
         <span style={{ fontFamily: "var(--serif)", fontSize: 14, color: "var(--gold)", letterSpacing: "0.12em" }}>Mon transporteur préféré</span>
-        <span> By ColisConsult</span>
       </div>
 
       {/* ── LAYOUT: two columns on desktop, stack on mobile ── */}
