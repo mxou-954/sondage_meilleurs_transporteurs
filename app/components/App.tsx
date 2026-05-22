@@ -29,6 +29,17 @@ export default function App() {
 
   const questions: Question[] = profile === "pro" ? QUESTIONS_PRO : QUESTIONS_CLIENT;
 
+  // Dans App.tsx, quand le step change
+  useEffect(() => {
+    sessionStorage.setItem("step", step);
+  }, [step]);
+  
+  // Au montage, restaurez le step
+  useEffect(() => {
+    const saved = sessionStorage.getItem("step");
+    if (saved && saved !== "done") setStep(saved as StepName);
+  }, []);
+
   const go = useCallback((next: StepName, d = 1) => {
     setDir(d);
     setPrev(step);

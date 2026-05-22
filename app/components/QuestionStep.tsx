@@ -18,7 +18,7 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
   const progress = Math.round(((qIndex + 1) / (total + 3)) * 100) + 30; // offset for profile+identity steps
 
   const shuffled = useMemo(() => {
-    return [...question.transporteurs].sort(() => Math.random() - 0.5);
+    return [...question.transporteurs].sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
   }, [question.id]);
 
   return (

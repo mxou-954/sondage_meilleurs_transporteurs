@@ -27,7 +27,7 @@ export default function AvisStep({ question, votedId, onNext, onSkip, onBack }: 
   const transporteurs = useMemo(() => {
     return [...question.transporteurs]
       .filter(t => t.id !== votedId)
-      .sort(() => Math.random() - 0.5);
+      .sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
   }, [question.id, votedId]);
 
   const toggle = (tId: string, key: "good" | "neutral" | "bad") => {

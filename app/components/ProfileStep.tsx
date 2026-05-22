@@ -29,17 +29,11 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
                 id: "pro" as Profile,
                 icon: "💼",
                 title: "Professionnel",
-                subtitle: "Transport & Logistique",
-                desc: "Responsable transport, acheteur, supply chain, consultant…",
-                tags: ["Livraison", "Retours", "Suivi", "Service client"],
               },
               {
                 id: "client" as Profile,
                 icon: "🙎‍♂️",
                 title: "Particulier",
-                subtitle: "Particulier",
-                desc: "Vous recevez ou expédiez des colis régulièrement.",
-                tags: ["Livraison domicile", "Retours", "Suivi", "Service client"],
               },
             ] as const).map((p, i) => (
               <motion.button
@@ -57,21 +51,7 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
               >
                 <div style={{ fontSize: 32, marginBottom: 16 }}>{p.icon}</div>
                 <div className="serif" style={{ fontSize: 22, color: "var(--text)", marginBottom: 4, fontWeight: 400 }}>{p.title}</div>
-                <div style={{ fontSize: 11, color: "var(--gold)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 16 }}>{p.subtitle}</div>
-                <p style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7, marginBottom: 20 }}>{p.desc}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                  {p.tags.map(tag => (
-                    <span key={tag} style={{
-                      padding: "4px 10px", borderRadius: 2,
-                      border: "1px solid rgba(200,169,110,0.2)",
-                      background: "rgba(200,169,110,0.06)",
-                      fontSize: 11, color: "var(--gold)", letterSpacing: "0.05em",
-                    }}>{tag}</span>
-                  ))}
-                </div>
-                <div style={{ marginTop: 24, fontSize: 12, color: "var(--gold)", letterSpacing: "0.08em" }}>
-                  1 question · ~1 min →
-                </div>
+
               </motion.button>
             ))}
           </div>
