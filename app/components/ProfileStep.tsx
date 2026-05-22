@@ -29,11 +29,13 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
                 id: "pro" as Profile,
                 icon: "💼",
                 title: "Professionnel",
+                description: "Les votants devront renseigner leur email professionnel.",
               },
               {
                 id: "client" as Profile,
                 icon: "🙎‍♂️",
                 title: "Particulier",
+                description: "",
               },
             ] as const).map((p, i) => (
               <motion.button
@@ -51,7 +53,7 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
               >
                 <div style={{ fontSize: 32, marginBottom: 16 }}>{p.icon}</div>
                 <div className="serif" style={{ fontSize: 22, color: "var(--text)", marginBottom: 4, fontWeight: 400 }}>{p.title}</div>
-
+                <div className="serif" style={{ fontSize: 14, color: "var(--text)", marginBottom: 4, fontWeight: 400 }}>{p.description}</div>
               </motion.button>
             ))}
           </div>

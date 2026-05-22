@@ -33,7 +33,7 @@ export default function App() {
   useEffect(() => {
     sessionStorage.setItem("step", step);
   }, [step]);
-  
+
   // Au montage, restaurez le step
   useEffect(() => {
     const saved = sessionStorage.getItem("step");
@@ -178,6 +178,7 @@ export default function App() {
               savedVote={votes[questions[qIndex].id] ?? null}
               onVote={handleVote}
               onBack={goBack}
+              profile={profile}
             />
           </motion.div>
         )}

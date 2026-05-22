@@ -120,12 +120,36 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
         />
 
         {/* Subtitle */}
-        <motion.p
+        {/* Subtitle */}
+        <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
-          style={{ fontSize: "clamp(13px, 2vw, 15px)", color: "var(--text2)", maxWidth: 420, lineHeight: 1.75, marginBottom: 36 }}
+          style={{ maxWidth: 440, marginBottom: 36, display: "flex", flexDirection: "column", gap: 16, alignItems: "center" }}
         >
-          L&apos;élection par les professionnels du transport et les expéditeurs. Votez par catégorie et distinguez l&apos;excellence.
-        </motion.p>
+          <p style={{ fontSize: "clamp(13px, 2vw, 15px)", color: "var(--text2)", lineHeight: 1.85, textAlign: "center" }}>
+            L&apos;élection annuelle par les professionnels du transport et les expéditeurs. Votez et distinguez l&apos;excellence.
+          </p>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 16px", borderRadius: 20, border: "1px solid rgba(200,169,110,0.2)", background: "rgba(200,169,110,0.05)" }}>
+            <span style={{ fontSize: 11, color: "var(--text3)", letterSpacing: "0.08em" }}>
+              Sondage indépendant par
+            </span>
+              <a
+              href="https://www.colisconsult.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: 12, fontWeight: 600, color: "var(--gold)",
+                letterSpacing: "0.1em", textDecoration: "none",
+                transition: "color 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--gold2)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--gold)")}
+            >
+              ColisConsult
+            </a>
+            <span style={{ fontSize: 10, color: "var(--text3)" }}>↗</span>
+          </div>
+        </motion.div>
 
         {/* CTA */}
         <motion.button

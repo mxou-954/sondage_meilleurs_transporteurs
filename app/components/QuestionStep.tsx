@@ -11,9 +11,10 @@ type Props = {
   savedVote: string | null;
   onVote: (qId: string, tId: string | null) => void;
   onBack: () => void;
+  profile: "pro" | "client";
 };
 
-export default function QuestionStep({ question, qIndex, total, savedVote, onVote, onBack }: Props) {
+export default function QuestionStep({ question, qIndex, total, savedVote, onVote, onBack, profile }: Props) {
   const [selected, setSelected] = useState<string | null>(savedVote);
   const progress = Math.round(((qIndex + 1) / (total + 3)) * 100) + 30; // offset for profile+identity steps
 
@@ -42,6 +43,20 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
               {question.text}
             </h2>
             <div className="divider-gold" style={{ width: 40, margin: "16px 0 28px" }} />
+            {profile === "pro" && (
+              <div style={{
+                display: "flex", alignItems: "flex-start", gap: 10,
+                padding: "10px 14px", marginBottom: 20,
+                background: "rgba(200,169,110,0.05)",
+                border: "1px solid rgba(200,169,110,0.15)",
+                borderRadius: 4,
+              }}>
+                <span style={{ fontSize: 13, flexShrink: 0, marginTop: 1 }}>⚖️</span>
+                <p style={{ fontSize: 11, color: "var(--text3)", lineHeight: 1.6 }}>
+                  Vote fondé sur l'honnêteté professionnelle — les transporteurs sont invités à ne pas voter pour eux-mêmes !
+                </p>
+              </div>
+            )}
           </motion.div>
 
           {/* Transporteur list */}
@@ -85,11 +100,8 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
 
                   {/* Name + desc */}
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 500, color: isSelected ? "var(--gold2)" : "var(--text)", marginBottom: 2 }}>
+                    <div style={{ fontSize: 16, fontWeight: 500, color: isSelected ? "var(--gold2)" : "var(--text)", marginBottom: 2 }}>
                       {t.nom}
-                    </div>
-                    <div style={{ fontSize: 12, color: "var(--text3)", lineHeight: 1.4 }}>
-                      {t.description}
                     </div>
                   </div>
 
