@@ -266,7 +266,6 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
         )}
       </div>
 
-      {/* ── POPUP : voter en tant que particulier ── 
       <AnimatePresence>
         {showPopup && (
           <>
@@ -335,7 +334,6 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
           </>
         )}
       </AnimatePresence>
-    */}
     </div>
   );
 }
