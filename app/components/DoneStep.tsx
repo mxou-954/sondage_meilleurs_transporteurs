@@ -236,7 +236,7 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
-                <span style={{ fontSize: 12, color: "var(--text2)" }}>+200 entreprises accompagnées</span>
+                <span style={{ fontSize: 12, color: "var(--text2)" }}>+150 entreprises accompagnées</span>
               </div>
             </div>
 
@@ -256,11 +256,11 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
               onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.boxShadow = "0 0 40px rgba(200,169,110,0.4)"; }}
               onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.boxShadow = "0 0 24px rgba(200,169,110,0.25)"; }}
             >
-              📅 Prendre rendez-vous avec Matthieu
+              Vers ColisConsult
             </a>
 
             <p style={{ fontSize: 11, color: "var(--text3)", textAlign: "center" }}>
-              Échange de 30 min · Sans engagement
+              Pré-audit gratuit & sans engagement
             </p>
           </motion.div>
         )}
@@ -298,7 +298,7 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
                 Souhaitez-vous aussi voter<br />en tant qu'expéditeur ?
               </h3>
               <p style={{ fontSize: 13, color: "var(--text2)", textAlign: "center", lineHeight: 1.7, marginBottom: 28 }}>
-                Votre expérience personnelle compte aussi. Le vote particulier prend moins d'une minute.
+                Votre expérience personnelle compte aussi !
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -313,7 +313,7 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
                     cursor: "pointer", boxShadow: "0 0 20px rgba(200,169,110,0.2)",
                   }}
                 >
-                  Oui, voter en tant qu'expéditeur →
+                  Oui, voter en tant que particulier →
                 </button>
                 <button
                   onClick={() => setShowPopup(false)}
