@@ -102,7 +102,6 @@ export default function App() {
     else if (step === "identity")        go("points-negatifs", -1);
   };
 
-  const canGoBack = step !== "home" && step !== "done";
   const qIndex    = step.startsWith("q") ? parseInt(step.slice(1)) : -1;
 
   const variants = {
@@ -162,6 +161,7 @@ export default function App() {
             style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
             <PointsNegatifsStep
               stepLabel="Bonus"
+              profile={profile}
               onNext={p => { setPointsNegatifs(p); go("identity", 1); }}
               onSkip={() => go("identity", 1)}
               onBack={() => go(profile === "pro" ? "webinar" : "avis", -1)}
@@ -222,6 +222,7 @@ export default function App() {
               alreadyVoted={alreadyVoted}
               onRestartAsClient={restartAsClient}
               avis={avis}
+              pointsNegatifs={pointsNegatifs}
             />
           </motion.div>
         )}

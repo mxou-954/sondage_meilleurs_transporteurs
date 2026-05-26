@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Question } from "@/app/data/transporteurs";
+import { POINTS_NEGATIFS_PRO, POINTS_NEGATIFS_CLIENT } from "@/app/data/transporteurs";
 
 type Votes = Record<string, string>;
 
@@ -13,16 +14,15 @@ type Props = {
   alreadyVoted?: boolean;
   onRestartAsClient?: () => void;
   avis?: Record<string, "good" | "neutral" | "bad">;
+  pointsNegatifs?: string[]; // ← ajout
 };
 
-export default function DoneStep({ votes, questions, name, profile, alreadyVoted, onRestartAsClient, avis }: Props) {
-  const [copied, setCopied] = useState(false);
+export default function DoneStep({ votes, questions, name, profile, alreadyVoted, onRestartAsClient, avis, pointsNegatifs }: Props) {  const [copied, setCopied] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
-  // Show popup for pros after 2s
   useEffect(() => {
     if (profile === "pro") {
-      const t = setTimeout(() => setShowPopup(true), 2000);
+      const t = setTimeout(() => setShowPopup(true), 5000);
       return () => clearTimeout(t);
     }
   }, [profile]);
@@ -146,6 +146,31 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
               })}
             </div>
           )}
+          {/* Points négatifs recap */}
+          {pointsNegatifs && pointsNegatifs.length > 0 && (
+            <div style={{ borderRadius: 4, overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)", marginTop: 8 }}>
+              <div style={{ padding: "8px 16px", background: "rgba(255,255,255,0.02)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                <span style={{ fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--text3)" }}>
+                  Points à améliorer
+                </span>
+              </div>
+              {pointsNegatifs.map((pId, i) => {
+                const allPoints = [...POINTS_NEGATIFS_PRO, ...POINTS_NEGATIFS_CLIENT];
+                const point = allPoints.find(p => p.id === pId);
+                return (
+                  <div key={pId} style={{
+                    display: "flex", alignItems: "center", gap: 10,
+                    padding: "10px 16px",
+                    background: i % 2 === 0 ? "var(--bg2)" : "rgba(255,255,255,0.01)",
+                    borderBottom: i < pointsNegatifs.length - 1 ? "1px solid rgba(255,255,255,0.03)" : "none",
+                  }}>
+                    <span style={{ fontSize: 14, flexShrink: 0 }}>⚡</span>
+                    <span style={{ fontSize: 12, color: "var(--text3)" }}>{point?.label ?? pId}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           {/* Share */}
           <div>
@@ -255,7 +280,7 @@ export default function DoneStep({ votes, questions, name, profile, alreadyVoted
               onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.boxShadow = "0 0 40px rgba(200,169,110,0.4)"; }}
               onMouseLeave={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.boxShadow = "0 0 24px rgba(200,169,110,0.25)"; }}
             >
-              Vers ColisConsult
+              Réduire vos coûts 
             </a>
 
             <p style={{ fontSize: 11, color: "var(--text3)", textAlign: "center" }}>

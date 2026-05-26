@@ -58,17 +58,32 @@ export const QUESTIONS_CLIENT: Question[] = [
 export const VOTE_DEADLINE = new Date("2026-06-30T23:59:59");
 export const ANNOUNCE_DATE = "10 juillet 2026";
 
-export const POINTS_NEGATIFS = [
-  { id: "retard",       label: "Retards de livraison récurrents" },
-  { id: "suivi",        label: "Suivi colis peu fiable ou imprécis" },
-  { id: "service",      label: "Service client difficile à joindre" },
-  { id: "avise",        label: "Avis de passage sans tentative réelle" },
-  { id: "casse",        label: "Colis endommagés ou perdus" },
-  { id: "prix",         label: "Tarifs peu transparents ou augmentations fréquentes" },
-  { id: "remboursement",label: "Remboursements lents ou refusés" },
-  { id: "ponctualite",  label: "Plages de livraison trop larges" },
-  { id: "pro-contact",  label: "Interlocuteur commercial peu réactif" },
-  { id: "facturation",  label: "Erreurs de facturation" },
-  { id: "interface",    label: "Outils digitaux / API peu performants" },
-  { id: "eco",          label: "Manque d'engagement environnemental" },
+export const POINTS_NEGATIFS_CLIENT = [
+  { id: "retard-reception",    label: "Retards de livraison récurrents" },
+  { id: "avis-passage",        label: "Avis de passage sans tentative réelle" },
+  { id: "suivi-client",        label: "Suivi colis peu fiable ou imprécis" },
+  { id: "casse-reception",     label: "Colis endommagés ou perdus à la réception" },
+  { id: "plage-large",         label: "Plages de livraison trop larges" },
+  { id: "relais-ferme",        label: "Point relais fermé ou saturé" },
+  { id: "service-client",      label: "Service client difficile à joindre" },
+  { id: "remboursement",       label: "Remboursements lents ou refusés" },
+  { id: "retour-complique",    label: "Procédure de retour trop compliquée" },
+  { id: "notification",        label: "Notifications de livraison absentes ou tardives" },
+  { id: "livreur-attitude",    label: "Comportement du livreur" },
+  { id: "consigne-absent",     label: "Dépôt en lieu sûr sans accord préalable" },
+];
+
+export const POINTS_NEGATIFS_PRO = [
+  { id: "retard-envoi",        label: "Retards d'enlèvement ou de livraison" },
+  { id: "tarifs-opaques",      label: "Tarifs peu transparents ou hausses fréquentes" },
+  { id: "facturation-erreur",  label: "Erreurs de facturation récurrentes" },
+  { id: "poids-volu",          label: "Application abusive du poids volumétrique" },
+  { id: "suivi-pro",           label: "Suivi et traçabilité insuffisants" },
+  { id: "casse-envoi",         label: "Colis endommagés ou pertes fréquentes" },
+  { id: "interlocuteur",       label: "Interlocuteur commercial peu réactif" },
+  { id: "api-outils",          label: "Outils digitaux / API peu performants" },
+  { id: "reclamation",         label: "Gestion des réclamations trop lente" },
+  { id: "contrat-negocia",     label: "Peu de flexibilité en négociation contractuelle" },
+  { id: "eco-pro",             label: "Manque d'engagement environnemental" },
+  { id: "international-docs",  label: "Complexité des documents douaniers" },
 ];

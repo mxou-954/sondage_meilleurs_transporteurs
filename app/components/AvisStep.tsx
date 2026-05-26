@@ -50,11 +50,17 @@ export default function AvisStep({ question, votedId, onNext, onSkip, onBack }: 
         <div style={{ maxWidth: 640, margin: "0 auto", padding: "32px 20px 0" }}>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-            <p style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 10 }}>
-              Étape bonus
-            </p>
+            <div style={{
+              display: "inline-flex", alignItems: "center", padding: "4px 12px",
+              borderRadius: 20, background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)", marginBottom: 14,
+            }}>
+              <span style={{ fontSize: 10, color: "var(--text3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                Optionnel
+              </span>
+            </div>
             <h2 className="serif" style={{ fontSize: "clamp(1.3rem, 4vw, 1.9rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.35, marginBottom: 8 }}>
-              Donnez votre avis sur les autres transporteurs
+              Donnez votre avis sur d'autres transporteurs
             </h2>
             <div className="divider-gold" style={{ width: 40, margin: "14px 0 6px" }} />
             <p style={{ fontSize: 13, color: "var(--text3)", marginBottom: 28, lineHeight: 1.6 }}>

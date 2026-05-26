@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { POINTS_NEGATIFS } from "@/app/data/transporteurs";
+import { POINTS_NEGATIFS_CLIENT, POINTS_NEGATIFS_PRO } from "@/app/data/transporteurs";
 import TopBar from "./TopBar";
 
 type Props = {
@@ -9,10 +9,12 @@ type Props = {
   onSkip: () => void;
   onBack: () => void;
   stepLabel: string;
+  profile: "pro" | "client"; // ← ajout
 };
 
-export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel }: Props) {
+export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel, profile }: Props) {
   const [selected, setSelected] = useState<string[]>([]);
+  const points = profile === "pro" ? POINTS_NEGATIFS_PRO : POINTS_NEGATIFS_CLIENT;
 
   const toggle = (id: string) => {
     setSelected(prev => {
@@ -41,7 +43,7 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel }
             </div>
 
             <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
-              Quels points négatifs souhaitez-vous le plus voir changer chez les transporteurs ?
+              Quels sont vos principales critiques vis a vis des transporteurs ?
             </h2>
             <div className="divider-gold" style={{ width: 40, margin: "16px 0 8px" }} />
             <p style={{ fontSize: 12, color: "var(--text3)", marginBottom: 24, lineHeight: 1.6 }}>
@@ -53,7 +55,7 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel }
           </motion.div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {POINTS_NEGATIFS.map((p, i) => {
+            {points.map((p, i) => {
               const isSelected = selected.includes(p.id);
               const isDisabled = !isSelected && selected.length >= 3;
               return (
