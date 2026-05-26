@@ -36,7 +36,7 @@ export default function TopBar({ step, onBack, progress }: Props) {
 
         {/* Brand */}
         <span style={{ fontFamily: "var(--serif)", fontSize: 14, color: "var(--gold)", letterSpacing: "0.12em" }}>
-          Mon transporteur préféré
+          Mon transporteur préféré S1 2026
         </span>
 
         {/* Step indicator */}

@@ -57,3 +57,18 @@ export const QUESTIONS_CLIENT: Question[] = [
 
 export const VOTE_DEADLINE = new Date("2026-06-30T23:59:59");
 export const ANNOUNCE_DATE = "10 juillet 2026";
+
+export const POINTS_NEGATIFS = [
+  { id: "retard",       label: "Retards de livraison récurrents" },
+  { id: "suivi",        label: "Suivi colis peu fiable ou imprécis" },
+  { id: "service",      label: "Service client difficile à joindre" },
+  { id: "avise",        label: "Avis de passage sans tentative réelle" },
+  { id: "casse",        label: "Colis endommagés ou perdus" },
+  { id: "prix",         label: "Tarifs peu transparents ou augmentations fréquentes" },
+  { id: "remboursement",label: "Remboursements lents ou refusés" },
+  { id: "ponctualite",  label: "Plages de livraison trop larges" },
+  { id: "pro-contact",  label: "Interlocuteur commercial peu réactif" },
+  { id: "facturation",  label: "Erreurs de facturation" },
+  { id: "interface",    label: "Outils digitaux / API peu performants" },
+  { id: "eco",          label: "Manque d'engagement environnemental" },
+];

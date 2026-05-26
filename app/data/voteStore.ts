@@ -15,22 +15,26 @@ export async function saveVote(entry: {
   company?: string;
   profile?: string;
   votes: Record<string, string>;
-  avis?: Record<string, string>; // ← ajouté
+  avis?: Record<string, string>;
+  pointNegatif?: string; // ← ajout
   timestamp: number;
 }) {
   await redis.set(`voter:${entry.email.toLowerCase()}`, entry);
   await redis.incr("total_voters");
 
-  // Votes principaux
   for (const [qId, tId] of Object.entries(entry.votes)) {
     await redis.incr(`result:${qId}:${tId}`);
   }
 
-  // Avis emoji
   if (entry.avis) {
     for (const [tId, sentiment] of Object.entries(entry.avis)) {
       await redis.incr(`avis:${tId}:${sentiment}`);
     }
+  }
+
+  // ← ajout
+  if (entry.pointNegatif) {
+    await redis.incr(`point-negatif:${entry.pointNegatif}`);
   }
 }
 

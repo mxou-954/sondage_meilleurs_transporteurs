@@ -8,12 +8,14 @@ import QuestionStep from "./QuestionStep";
 import DoneStep    from "./DoneStep";
 import { QUESTIONS_PRO, QUESTIONS_CLIENT, Question } from "@/app/data/transporteurs";
 import AvisStep from "./AvisStep";
+import PointsNegatifsStep from "./PointsNegatifsStep";
+import WebinarStep from "./WebinarStep";
 
 type Avis = Record<string, "good" | "neutral" | "bad">;
 export type Profile = "pro" | "client";
 type Votes = Record<string, string>;
 
-type StepName = "home" | "profile" | "identity" | `q${number}` | "avis" | "done";
+type StepName = "home" | "profile" | "identity" | `q${number}` | "avis" | "points-negatifs" | "webinar" | "done";
 
 export default function App() {
   const [step,     setStep]     = useState<StepName>("home");
@@ -26,6 +28,7 @@ export default function App() {
   const [votes,    setVotes]    = useState<Votes>({});
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [avis, setAvis] = useState<Avis>({});
+  const [pointNegatif, setPointNegatif] = useState<string | null>(null);
 
   const questions: Question[] = profile === "pro" ? QUESTIONS_PRO : QUESTIONS_CLIENT;
 
@@ -52,8 +55,10 @@ export default function App() {
       // Map current step to previous
       if (step === "profile")  { setDir(-1); setPrev(step); setStep("home"); }
       else if (step === "q0")       { setDir(-1); setPrev(step); setStep("profile"); }
-      else if (step === "avis")     { setDir(-1); setPrev(step); setStep("q0"); }
-      else if (step === "identity") { setDir(-1); setPrev(step); setStep("avis"); }
+      else if (step === "avis")            { setDir(-1); setPrev(step); setStep("q0"); }
+      else if (step === "webinar")         { setDir(-1); setPrev(step); setStep("avis"); }
+      else if (step === "points-negatifs") { setDir(-1); setPrev(step); setStep(profile === "pro" ? "webinar" : "avis"); }
+      else if (step === "identity")        { setDir(-1); setPrev(step); setStep("points-negatifs"); }
       else if (step.startsWith("q")) {
         const idx = parseInt(step.slice(1));
         if (idx > 0) { setDir(-1); setPrev(step); setStep(`q${idx - 1}` as StepName); }
@@ -89,14 +94,12 @@ export default function App() {
   };
 
   const goBack = () => {
-    if (step === "profile")       go("home", -1);
-    else if (step === "q0")       go("profile", -1);
-    else if (step === "identity") go("avis", -1);
-    else if (step === "avis")     go("q0", -1);
-    else if (step.startsWith("q")) {
-      const idx = parseInt(step.slice(1));
-      if (idx > 0) go(`q${idx - 1}` as StepName, -1);
-    }
+    if (step === "profile")              go("home", -1);
+    else if (step === "q0")              go("profile", -1);
+    else if (step === "avis")            go("q0", -1);
+    else if (step === "webinar")         go("avis", -1);
+    else if (step === "points-negatifs") go(profile === "pro" ? "webinar" : "avis", -1);
+    else if (step === "identity")        go("points-negatifs", -1);
   };
 
   const canGoBack = step !== "home" && step !== "done";
@@ -141,7 +144,7 @@ export default function App() {
               profile={profile}
               onNext={async (n, em, co) => {
                 setName(n); setEmail(em); setCompany(co);
-                const result = await submitVotes(votes, em, n, co, profile, avis);
+                const result = await submitVotes(votes, em, n, co, profile, avis, pointNegatif ?? undefined);
                 if (result === "already_voted") {
                   // Passer l'info à DoneStep
                   setAlreadyVoted(true);
@@ -153,6 +156,30 @@ export default function App() {
           </motion.div>
         )}
 
+        {step === "points-negatifs" && (
+          <motion.div key="points-negatifs" custom={dir} variants={variants}
+            initial="enter" animate="center" exit="exit" transition={transition}
+            style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
+            <PointsNegatifsStep
+              stepLabel="Bonus"
+              onNext={p => { setPointNegatif(p); go("identity", 1); }}
+              onSkip={() => go("identity", 1)}
+              onBack={() => go(profile === "pro" ? "webinar" : "avis", -1)}
+            />
+          </motion.div>
+        )}
+
+        {step === "webinar" && profile === "pro" && (
+          <motion.div key="webinar" custom={dir} variants={variants}
+            initial="enter" animate="center" exit="exit" transition={transition}
+            style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
+            <WebinarStep
+              onNext={() => go("points-negatifs", 1)}
+              onBack={() => go("avis", -1)}
+            />
+          </motion.div>
+        )}
+
         {step === "avis" && (
           <motion.div key="avis" custom={dir} variants={variants}
             initial="enter" animate="center" exit="exit" transition={transition}
@@ -160,8 +187,8 @@ export default function App() {
             <AvisStep
               question={questions[0]}
               votedId={votes[questions[0].id] ?? null}
-              onNext={a => { setAvis(a); go("identity", 1); }}
-              onSkip={() => go("identity", 1)}
+              onNext={a => { setAvis(a); go(profile === "pro" ? "webinar" : "points-negatifs", 1); }}
+              onSkip={() => go(profile === "pro" ? "webinar" : "points-negatifs", 1)}
               onBack={() => go("q0", -1)}
             />
           </motion.div>
@@ -204,12 +231,12 @@ export default function App() {
   );
 }
 
-async function submitVotes(votes: Votes, email: string, name: string, company: string, profile: Profile, avis?: Avis) {
+async function submitVotes(votes: Votes, email: string, name: string, company: string, profile: Profile, avis?: Avis, pointNegatif?: string) {
   try {
     const res = await fetch("/api/vote", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, name, company, profile, votes, avis }),
+      body: JSON.stringify({ email, name, company, profile, votes, avis, pointNegatif }),
     });
     if (res.status === 409) {
       // Email déjà utilisé — on va quand même sur done mais on peut afficher un message
