@@ -10,7 +10,7 @@ function isProEmail(email: string) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, name, company, profile, votes, avis, pointNegatif } = await req.json();
+    const { email, name, company, profile, votes, avis, pointsNegatifs } = await req.json();
 
     if (!email || !votes) return NextResponse.json({ error: "Données manquantes" }, { status: 400 });
     if (profile === "pro" && !isProEmail(email))
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     if (Object.keys(votes).length === 0)
       return NextResponse.json({ error: "Aucun vote." }, { status: 400 });
 
-    await saveVote({ email, name, company, profile, votes, avis, pointNegatif, timestamp: Date.now() });
+    await saveVote({ email, name, company, profile, votes, avis, pointsNegatifs, timestamp: Date.now() });
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error(e);

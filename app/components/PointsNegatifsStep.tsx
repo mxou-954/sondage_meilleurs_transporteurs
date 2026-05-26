@@ -5,14 +5,22 @@ import { POINTS_NEGATIFS } from "@/app/data/transporteurs";
 import TopBar from "./TopBar";
 
 type Props = {
-  onNext: (pointId: string | null) => void;
+  onNext: (points: string[]) => void;
   onSkip: () => void;
   onBack: () => void;
   stepLabel: string;
 };
 
 export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel }: Props) {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string[]>([]);
+
+  const toggle = (id: string) => {
+    setSelected(prev => {
+      if (prev.includes(id)) return prev.filter(x => x !== id);
+      if (prev.length >= 3) return prev;
+      return [...prev, id];
+    });
+  };
 
   return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
@@ -22,43 +30,62 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel }
         <div style={{ maxWidth: 640, margin: "0 auto", padding: "32px 20px 0" }}>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "4px 12px", borderRadius: 20, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", marginBottom: 14 }}>
-              <span style={{ fontSize: 10, color: "var(--text3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>Optionnel</span>
+            <div style={{
+              display: "inline-flex", alignItems: "center", padding: "4px 12px",
+              borderRadius: 20, background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)", marginBottom: 14,
+            }}>
+              <span style={{ fontSize: 10, color: "var(--text3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                Optionnel
+              </span>
             </div>
+
             <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
               Quels points négatifs souhaitez-vous le plus voir changer chez les transporteurs ?
             </h2>
             <div className="divider-gold" style={{ width: 40, margin: "16px 0 8px" }} />
             <p style={{ fontSize: 12, color: "var(--text3)", marginBottom: 24, lineHeight: 1.6 }}>
-              Choisissez le point qui vous tient le plus à cœur — un seul choix.
+              Choisissez jusqu'à 3 points —{" "}
+              <span style={{ color: selected.length > 0 ? "var(--gold)" : "var(--text3)", transition: "color 0.15s" }}>
+                {selected.length}/3 sélectionné{selected.length > 1 ? "s" : ""}
+              </span>
             </p>
           </motion.div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {POINTS_NEGATIFS.map((p, i) => {
-              const isSelected = selected === p.id;
+              const isSelected = selected.includes(p.id);
+              const isDisabled = !isSelected && selected.length >= 3;
               return (
                 <motion.button
                   key={p.id}
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.03 }}
-                  onClick={() => setSelected(isSelected ? null : p.id)}
+                  onClick={() => toggle(p.id)}
                   style={{
                     display: "flex", alignItems: "center", justifyContent: "space-between",
                     gap: 14, padding: "14px 16px", textAlign: "left",
                     background: isSelected ? "rgba(200,169,110,0.09)" : "rgba(255,255,255,0.025)",
                     border: `1px solid ${isSelected ? "var(--gold)" : "rgba(255,255,255,0.06)"}`,
-                    borderRadius: 4, cursor: "pointer",
+                    borderRadius: 4,
+                    cursor: isDisabled ? "not-allowed" : "pointer",
+                    opacity: isDisabled ? 0.35 : 1,
                     boxShadow: isSelected ? "0 0 16px rgba(200,169,110,0.1)" : "none",
                     transition: "all 0.15s", width: "100%",
                   }}
                 >
-                  <span style={{ fontSize: 14, color: isSelected ? "var(--gold2)" : "var(--text)", fontWeight: isSelected ? 500 : 400, lineHeight: 1.4 }}>
+                  <span style={{
+                    fontSize: 14,
+                    color: isSelected ? "var(--gold2)" : "var(--text)",
+                    fontWeight: isSelected ? 500 : 400,
+                    lineHeight: 1.4,
+                  }}>
                     {p.label}
                   </span>
+
                   <div style={{
-                    flexShrink: 0, width: 20, height: 20, borderRadius: "50%",
+                    flexShrink: 0, width: 20, height: 20, borderRadius: 3,
                     border: `1.5px solid ${isSelected ? "var(--gold)" : "rgba(255,255,255,0.12)"}`,
                     background: isSelected ? "var(--gold)" : "transparent",
                     display: "flex", alignItems: "center", justifyContent: "center",
@@ -99,23 +126,24 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel }
           >
             Passer
           </button>
+
           <button
             onClick={() => onNext(selected)}
             style={{
               flex: 1, padding: "14px",
-              background: selected
+              background: selected.length > 0
                 ? "linear-gradient(135deg, var(--gold) 0%, var(--gold2) 60%, var(--gold3) 100%)"
                 : "rgba(200,169,110,0.08)",
-              border: `1px solid ${selected ? "transparent" : "rgba(200,169,110,0.2)"}`,
+              border: `1px solid ${selected.length > 0 ? "transparent" : "rgba(200,169,110,0.2)"}`,
               borderRadius: 4,
-              color: selected ? "var(--bg)" : "var(--text3)",
-              fontSize: 12, fontWeight: selected ? 600 : 400,
+              color: selected.length > 0 ? "var(--bg)" : "var(--text3)",
+              fontSize: 12, fontWeight: selected.length > 0 ? 600 : 400,
               letterSpacing: "0.15em", textTransform: "uppercase",
               cursor: "pointer", transition: "all 0.2s",
-              boxShadow: selected ? "0 0 24px rgba(200,169,110,0.2)" : "none",
+              boxShadow: selected.length > 0 ? "0 0 24px rgba(200,169,110,0.2)" : "none",
             }}
           >
-            {selected ? "Valider →" : "Sélectionnez un point"}
+            {selected.length > 0 ? `Valider (${selected.length}) →` : "Sélectionnez jusqu'à 3 points"}
           </button>
         </div>
       </div>

@@ -28,7 +28,7 @@ const WEBINARS = [
     jour: "Jeudi",
     heure: "11h30",
     titre: "Spécial E-commerce",
-    desc: "Stratégies transport pour les e-commerçants : réduire les coûts, améliorer les délais et fidéliser vos clients.",
+    desc: "Mieux fixer les tarifs de livraison avec les 7 erreurs à éviter et la méthode exclusive de ColisConsult après l'analyse de 500 sites.",
     tags: ["E-commerce", "B2C", "Optimisation"],
     link: "https://app.livestorm.co/p/d7c705cb-fe19-4575-9459-f75dcaa3313e",
     badge: "Inscription ouverte",
@@ -50,9 +50,6 @@ export default function WebinarStep({ onNext, onBack }: Props) {
         >
           {/* Header */}
           <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <p style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 10 }}>
-              Exclusif · Professionnels
-            </p>
             <h2 className="serif" style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.2, marginBottom: 10 }}>
               Nos prochains webinars
             </h2>
@@ -132,15 +129,15 @@ export default function WebinarStep({ onNext, onBack }: Props) {
             onClick={onNext}
             style={{
               width: "100%", padding: "16px",
-              background: "transparent",
+              background: "linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%)",
               border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: 4, color: "var(--text3)",
+              borderRadius: 4, color: "var(--bg)",
               fontSize: 12, fontWeight: 500,
               letterSpacing: "0.12em", textTransform: "uppercase",
               cursor: "pointer", transition: "all 0.15s",
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(200,169,110,0.3)"; e.currentTarget.style.color = "var(--gold)"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "var(--text3)"; }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(200,169,110,0.3)"; e.currentTarget.style.color = "var(--bg)"; e.currentTarget.style.opacity = "0.85";}}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "var(--bg)"; e.currentTarget.style.opacity = "1";}}
           >
             Continuer le vote →
           </button>

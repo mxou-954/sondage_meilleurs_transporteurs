@@ -53,7 +53,7 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
               }}>
                 <span style={{ fontSize: 13, flexShrink: 0, marginTop: 1 }}>⚖️</span>
                 <p style={{ fontSize: 11, color: "var(--text3)", lineHeight: 1.6 }}>
-                  Vote fondé sur l'honnêteté professionnelle — les transporteurs sont invités à ne pas voter pour eux-mêmes !
+                  Vote fondé sur l'honnêteté professionnelle - les transporteurs ne doivent pas voter pour eux-mêmes ! Dans le cas échéant, les votes ne seront pas pris en compte.
                 </p>
               </div>
             )}

@@ -223,8 +223,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               textAlign: "center",
             }}
           >
-            L&apos;élection annuelle par les professionnels du transport et les
-            expéditeurs. Votez et distinguez l&apos;excellence.
+            L&apos;élection du meilleur transporteur par les expéditeurs professionnels et par les particuliers e-consommateurs
           </p>
 
           <div
@@ -248,8 +247,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               Sondage indépendant par
             </span>
             <a
-              href="https://www.colisconsult.com/"
-              target="_blank"
+              href="#colisconsult"
               rel="noopener noreferrer"
               style={{
                 fontSize: 12,
@@ -435,156 +433,9 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
         />
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section
-        style={{
-          padding: "80px 24px",
-          borderTop: "1px solid rgba(255,255,255,0.04)",
-          maxWidth: 900,
-          margin: "0 auto",
-          width: "100%",
-        }}
-      >
-        <p
-          style={{
-            fontSize: 11,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: "var(--gold)",
-            textAlign: "center",
-            marginBottom: 12,
-          }}
-        >
-          Processus
-        </p>
-        <h2
-          className="serif"
-          style={{
-            fontSize: "clamp(1.8rem,4vw,2.8rem)",
-            fontWeight: 400,
-            textAlign: "center",
-            color: "var(--text)",
-            marginBottom: 8,
-          }}
-        >
-          Comment voter
-        </h2>
-        <div
-          className="divider-gold"
-          style={{ width: 50, margin: "16px auto 56px" }}
-        />
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: 20,
-          }}
-        >
-          {[
-            {
-              n: "01",
-              icon: "👤",
-              title: "Votre profil",
-              desc: "Choisissez entre professionnel du transport ou expéditeur.",
-            },
-            {
-              n: "02",
-              icon: "🗳️",
-              title: "1 question",
-              desc: "Sélectionnez le transporteur qui vous paraît le meilleur.",
-            },
-            {
-              n: "03",
-              icon: "🏆",
-              title: "Résultats",
-              desc: "Le palmarès est annoncé le 10 juillet 2026 et partagé à tous les votants.",
-            },
-          ].map((s, i) => (
-            <motion.div
-              key={s.n}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              style={{
-                padding: "32px 28px",
-                background: "var(--bg2)",
-                border: "1px solid rgba(200,169,110,0.15)",
-                borderRadius: 4,
-                position: "relative",
-              }}
-            >
-              <div
-                className="serif"
-                style={{
-                  position: "absolute",
-                  top: 16,
-                  right: 20,
-                  fontSize: 36,
-                  opacity: 0.07,
-                  color: "var(--gold)",
-                }}
-              >
-                {s.n}
-              </div>
-              <div style={{ fontSize: 28, marginBottom: 16 }}>{s.icon}</div>
-              <h3
-                className="serif"
-                style={{
-                  fontSize: 18,
-                  color: "var(--text)",
-                  marginBottom: 10,
-                  fontWeight: 400,
-                }}
-              >
-                {s.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: 13,
-                  color: "var(--text2)",
-                  lineHeight: 1.75,
-                }}
-              >
-                {s.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        <div
-          style={{ display: "flex", justifyContent: "center", marginTop: 48 }}
-        >
-          <button
-            onClick={onStart}
-            style={{
-              padding: "14px 40px",
-              background: "transparent",
-              border: "1px solid var(--gold)",
-              borderRadius: 4,
-              color: "var(--gold)",
-              fontSize: 12,
-              fontWeight: 500,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              cursor: "pointer",
-              transition: "background 0.2s",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--goldfade)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "transparent")
-            }
-          >
-            Voter maintenant →
-          </button>
-        </div>
-      </section>
-
       {/* ── QUI EST COLISCONSULT ── */}
       <section
+        id="colisconsult"
         style={{
           padding: "80px 24px",
           maxWidth: 900,

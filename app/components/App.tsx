@@ -28,7 +28,7 @@ export default function App() {
   const [votes,    setVotes]    = useState<Votes>({});
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [avis, setAvis] = useState<Avis>({});
-  const [pointNegatif, setPointNegatif] = useState<string | null>(null);
+  const [pointsNegatifs, setPointsNegatifs] = useState<string[]>([]);
 
   const questions: Question[] = profile === "pro" ? QUESTIONS_PRO : QUESTIONS_CLIENT;
 
@@ -144,7 +144,7 @@ export default function App() {
               profile={profile}
               onNext={async (n, em, co) => {
                 setName(n); setEmail(em); setCompany(co);
-                const result = await submitVotes(votes, em, n, co, profile, avis, pointNegatif ?? undefined);
+                const result = await submitVotes(votes, em, n, co, profile, avis, pointsNegatifs);
                 if (result === "already_voted") {
                   // Passer l'info à DoneStep
                   setAlreadyVoted(true);
@@ -162,7 +162,7 @@ export default function App() {
             style={{ position: "absolute", inset: 0, overflowY: "auto" }}>
             <PointsNegatifsStep
               stepLabel="Bonus"
-              onNext={p => { setPointNegatif(p); go("identity", 1); }}
+              onNext={p => { setPointsNegatifs(p); go("identity", 1); }}
               onSkip={() => go("identity", 1)}
               onBack={() => go(profile === "pro" ? "webinar" : "avis", -1)}
             />
@@ -231,12 +231,12 @@ export default function App() {
   );
 }
 
-async function submitVotes(votes: Votes, email: string, name: string, company: string, profile: Profile, avis?: Avis, pointNegatif?: string) {
+async function submitVotes(votes: Votes, email: string, name: string, company: string, profile: Profile, avis?: Avis, pointsNegatifs?: string[]) {
   try {
     const res = await fetch("/api/vote", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, name, company, profile, votes, avis, pointNegatif }),
+      body: JSON.stringify({ email, name, company, profile, votes, avis, pointsNegatifs }),
     });
     if (res.status === 409) {
       // Email déjà utilisé — on va quand même sur done mais on peut afficher un message

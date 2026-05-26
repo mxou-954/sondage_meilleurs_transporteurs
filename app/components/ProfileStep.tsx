@@ -20,7 +20,7 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
           </h2>
           <div className="divider-gold" style={{ width: 50, margin: "16px auto 12px" }} />
           <p style={{ fontSize: 13, color: "var(--text2)", textAlign: "center", marginBottom: 40 }}>
-            Les questions s'adaptent à votre expérience.
+            Les questions s'adaptent à votre profil.
           </p>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>

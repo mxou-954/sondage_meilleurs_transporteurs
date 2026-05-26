@@ -16,7 +16,7 @@ export async function saveVote(entry: {
   profile?: string;
   votes: Record<string, string>;
   avis?: Record<string, string>;
-  pointNegatif?: string; // ← ajout
+  pointsNegatifs?: string[];  // ← renommé
   timestamp: number;
 }) {
   await redis.set(`voter:${entry.email.toLowerCase()}`, entry);
@@ -32,9 +32,10 @@ export async function saveVote(entry: {
     }
   }
 
-  // ← ajout
-  if (entry.pointNegatif) {
-    await redis.incr(`point-negatif:${entry.pointNegatif}`);
+  if (entry.pointsNegatifs) {  // ← renommé
+    for (const p of entry.pointsNegatifs) {
+      await redis.incr(`point-negatif:${p}`);
+    }
   }
 }
 
