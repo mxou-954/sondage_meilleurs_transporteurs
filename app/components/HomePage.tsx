@@ -496,8 +496,8 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               }}
             >
               ColisConsult est le cabinet de conseil indépendant de référence en
-              achat transport colis et palettes en France, fondé en 2005 par
-              Matthieu Erly.
+              achat transport colis et palettes en France, fondé en 2005 par 
+              <a href="https://www.linkedin.com/in/matthieuerly/"><strong style={{ color: "var(--text)", textDecoration: "underline" }}> Matthieu Erly</strong></a>.
             </p>
             <p
               style={{

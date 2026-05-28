@@ -154,7 +154,7 @@ export default function AvisStep({ question, votedId, onNext, onSkip, onBack }: 
             style={{
               flexShrink: 0, padding: "14px 20px", borderRadius: 4,
               background: "transparent", border: "1px solid rgba(255,255,255,0.08)",
-              color: "var(--text3)", fontSize: 12, fontWeight: 500,
+              color: "white", fontSize: 12, fontWeight: 500,
               letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer",
               transition: "border-color 0.15s, color 0.15s",
             }}
@@ -173,7 +173,7 @@ export default function AvisStep({ question, votedId, onNext, onSkip, onBack }: 
                 : "rgba(200,169,110,0.08)",
               border: `1px solid ${rated > 0 ? "transparent" : "rgba(200,169,110,0.2)"}`,
               borderRadius: 4,
-              color: rated > 0 ? "var(--bg)" : "var(--text3)",
+              color: rated > 0 ? "var(--bg)" : "white",
               fontSize: 12, fontWeight: rated > 0 ? 600 : 400,
               letterSpacing: "0.15em", textTransform: "uppercase",
               cursor: "pointer", transition: "all 0.2s",

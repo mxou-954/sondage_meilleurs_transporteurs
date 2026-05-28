@@ -61,15 +61,15 @@ export const ANNOUNCE_DATE = "1 juillet 2026";
 export const POINTS_NEGATIFS_CLIENT = [
   { id: "suivi-imprecis",      label: "Suivi colis peu fiable ou imprécis" },
   { id: "plage-large",         label: "Plages de livraison trop larges" },
-  { id: "retard",              label: "Retard significatif" },
+  { id: "retard",              label: "Retard livraison significatif" },
   { id: "colis-perdu",         label: "Colis déclaré perdu" },
   { id: "colis-non-livre",     label: "Colis déclaré livré, mais non livré" },
   { id: "lieu-sur",            label: "Dépôt en \"lieu sûr\" sans accord préalable" },
   { id: "relais-force",        label: "Colis prévu domicile, mais livré dans un relais" },
   { id: "relais-ferme",        label: "Point relais fermé ou saturé" },
-  { id: "mauvais-relais",      label: "Livré dans mauvais point relais" },
+  { id: "mauvais-relais",      label: "Colis livré dans mauvais point relais" },
   { id: "livreur-attitude",    label: "Comportement du livreur" },
-  { id: "emballage-degrade",   label: "Emballage livré dégradé" },
+  { id: "colis-degrade",       label: "Colis livré dégradé" },
   { id: "service-client",      label: "Service client difficile à joindre" },
 ];
 
