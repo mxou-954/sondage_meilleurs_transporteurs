@@ -168,7 +168,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
             filter: "drop-shadow(0 0 48px rgba(200,169,110,0.55))",
           }}
         >
-          🏆
+          🚚🏆
         </motion.div>
 
         {/* Title */}
@@ -509,19 +509,6 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
             >
               Nous accompagnons PME et grands groupes dans la renégociation de
               leurs contrats transport.
-            </p>
-            <p
-              style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.85 }}
-            >
-              En 20 ans, nous avons réalisé plus de{" "}
-              <strong style={{ color: "var(--text)" }}>
-                200 appels d'offres
-              </strong>{" "}
-              et généré en moyenne{" "}
-              <strong style={{ color: "var(--text)" }}>
-                3 à 22% d'économies
-              </strong>{" "}
-              sur les budgets transport de nos clients.
             </p>
 
             <a
