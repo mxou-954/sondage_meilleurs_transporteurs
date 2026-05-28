@@ -64,7 +64,7 @@ export default function AvisStep({ question, votedId, onNext, onSkip, onBack }: 
             </h2>
             <div className="divider-gold" style={{ width: 40, margin: "14px 0 6px" }} />
             <p style={{ fontSize: 13, color: "var(--text3)", marginBottom: 28, lineHeight: 1.6 }}>
-              Facultatif · Ces avis enrichissent le palmarès final.
+              Facultatif · Vous pouvez donner votre avis sur un ou plusieurs autres transporteurs.
             </p>
           </motion.div>
 
@@ -180,7 +180,7 @@ export default function AvisStep({ question, votedId, onNext, onSkip, onBack }: 
               boxShadow: rated > 0 ? "0 0 24px rgba(200,169,110,0.2)" : "none",
             }}
           >
-            {rated > 0 ? `Valider mes avis (${rated}) →` : "Notez au moins un transporteur"}
+            {rated > 0 ? `Valider mes avis (${rated}) →` : "Valider mes avis (0) →"}
           </button>
         </div>
       </div>

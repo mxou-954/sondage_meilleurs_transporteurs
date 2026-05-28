@@ -43,20 +43,7 @@ export default function QuestionStep({ question, qIndex, total, savedVote, onVot
               {question.text}
             </h2>
             <div className="divider-gold" style={{ width: 40, margin: "16px 0 28px" }} />
-            {profile === "pro" && (
-              <div style={{
-                display: "flex", alignItems: "flex-start", gap: 10,
-                padding: "10px 14px", marginBottom: 20,
-                background: "rgba(200,169,110,0.05)",
-                border: "1px solid rgba(200,169,110,0.15)",
-                borderRadius: 4,
-              }}>
-                <span style={{ fontSize: 13, flexShrink: 0, marginTop: 1 }}>⚖️</span>
-                <p style={{ fontSize: 11, color: "var(--text3)", lineHeight: 1.6 }}>
-                  Vote fondé sur l'honnêteté professionnelle - les transporteurs ne doivent pas voter pour eux-mêmes ! Dans le cas échéant, les votes ne seront pas pris en compte.
-                </p>
-              </div>
-            )}
+            
           </motion.div>
 
           {/* Transporteur list */}

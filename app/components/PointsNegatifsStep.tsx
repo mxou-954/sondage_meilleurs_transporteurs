@@ -9,17 +9,18 @@ type Props = {
   onSkip: () => void;
   onBack: () => void;
   stepLabel: string;
-  profile: "pro" | "client"; // ← ajout
+  profile: "pro" | "client";
 };
 
 export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel, profile }: Props) {
   const [selected, setSelected] = useState<string[]>([]);
   const points = profile === "pro" ? POINTS_NEGATIFS_PRO : POINTS_NEGATIFS_CLIENT;
+  const maxChoix = profile === "pro" ? 7 : 6;
 
   const toggle = (id: string) => {
     setSelected(prev => {
       if (prev.includes(id)) return prev.filter(x => x !== id);
-      if (prev.length >= 3) return prev;
+      if (prev.length >= maxChoix) return prev;
       return [...prev, id];
     });
   };
@@ -42,14 +43,20 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel, 
               </span>
             </div>
 
-            <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
-              Quels sont vos principales critiques vis a vis des transporteurs ?
-            </h2>
+            {profile === "pro" ? (
+              <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
+                Quels problèmes avez-vous rencontrés avec vos livraisons ?
+              </h2>
+            ) : (
+              <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
+                Quelles sont vos principales critiques vis-à-vis de vos transporteurs ?
+              </h2>
+            )}
             <div className="divider-gold" style={{ width: 40, margin: "16px 0 8px" }} />
             <p style={{ fontSize: 12, color: "var(--text3)", marginBottom: 24, lineHeight: 1.6 }}>
-              Choisissez jusqu'à 3 points —{" "}
+              Choisissez jusqu'à {maxChoix} points —{" "}
               <span style={{ color: selected.length > 0 ? "var(--gold)" : "var(--text3)", transition: "color 0.15s" }}>
-                {selected.length}/3 sélectionné{selected.length > 1 ? "s" : ""}
+                {selected.length}/{maxChoix} sélectionné{selected.length > 1 ? "s" : ""}
               </span>
             </p>
           </motion.div>
@@ -57,7 +64,7 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel, 
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {points.map((p, i) => {
               const isSelected = selected.includes(p.id);
-              const isDisabled = !isSelected && selected.length >= 3;
+              const isDisabled = !isSelected && selected.length >= maxChoix;
               return (
                 <motion.button
                   key={p.id}
@@ -145,7 +152,7 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel, 
               boxShadow: selected.length > 0 ? "0 0 24px rgba(200,169,110,0.2)" : "none",
             }}
           >
-            {selected.length > 0 ? `Valider (${selected.length}) →` : "Sélectionnez jusqu'à 3 points"}
+            {selected.length > 0 ? `Valider (${selected.length}) →` : `Sélectionnez jusqu'à ${maxChoix} points`}
           </button>
         </div>
       </div>

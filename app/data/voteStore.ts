@@ -21,22 +21,6 @@ export async function saveVote(entry: {
 }) {
   await redis.set(`voter:${entry.email.toLowerCase()}`, entry);
   await redis.incr("total_voters");
-
-  for (const [qId, tId] of Object.entries(entry.votes)) {
-    await redis.incr(`result:${qId}:${tId}`);
-  }
-
-  if (entry.avis) {
-    for (const [tId, sentiment] of Object.entries(entry.avis)) {
-      await redis.incr(`avis:${tId}:${sentiment}`);
-    }
-  }
-
-  if (entry.pointsNegatifs) {  // ← renommé
-    for (const p of entry.pointsNegatifs) {
-      await redis.incr(`point-negatif:${p}`);
-    }
-  }
 }
 
 export async function getTotalVoters(): Promise<number> {

@@ -21,7 +21,7 @@ export const QUESTIONS_PRO: Question[] = [
     label: "Meilleur transporteur",
     text: "Quel est votre transporteur préféré ? ",
     transporteurs: [
-      { id: "chronopost",    nom: "Chronopost",         logo: "chronopost.png",      pays: "France",    description: "Filiale La Poste, référence J+1 France" },
+      { id: "chronopost",    nom: "Chronopost",          logo: "chronopost.png",     pays: "France",    description: "Filiale La Poste, référence J+1 France" },
       { id: "dhl",           nom: "DHL Express",         logo: "dhl.png",            pays: "Monde",     description: "Premium fiabilité, fort en B2B" },
       { id: "ups",           nom: "UPS",                 logo: "ups.png",            pays: "USA",       description: "Solide réseau B2B, points relais entreprise" },
       { id: "fedex",         nom: "FedEx",               logo: "fedex.png",          pays: "USA",       description: "Fort en santé, tech et industrie" },
@@ -42,7 +42,7 @@ export const QUESTIONS_CLIENT: Question[] = [
     label: "Meilleur transporteur",
     text: "Quel est votre transporteur préféré ? ",
     transporteurs: [
-      { id: "chronopost",    nom: "Chronopost",         logo: "chronopost.png",      pays: "France",    description: "Filiale La Poste, référence J+1 France" },
+      { id: "chronopost",    nom: "Chronopost",          logo: "chronopost.png",     pays: "France",    description: "Filiale La Poste, référence J+1 France" },
       { id: "dhl",           nom: "DHL Express",         logo: "dhl.png",            pays: "Monde",     description: "Premium fiabilité, fort en B2B" },
       { id: "ups",           nom: "UPS",                 logo: "ups.png",            pays: "USA",       description: "Solide réseau B2B, points relais entreprise" },
       { id: "fedex",         nom: "FedEx",               logo: "fedex.png",          pays: "USA",       description: "Fort en santé, tech et industrie" },
@@ -56,34 +56,36 @@ export const QUESTIONS_CLIENT: Question[] = [
 ];
 
 export const VOTE_DEADLINE = new Date("2026-06-30T23:59:59");
-export const ANNOUNCE_DATE = "10 juillet 2026";
+export const ANNOUNCE_DATE = "1 juillet 2026";
 
 export const POINTS_NEGATIFS_CLIENT = [
-  { id: "retard-reception",    label: "Retards de livraison récurrents" },
-  { id: "avis-passage",        label: "Avis de passage sans tentative réelle" },
-  { id: "suivi-client",        label: "Suivi colis peu fiable ou imprécis" },
-  { id: "casse-reception",     label: "Colis endommagés ou perdus à la réception" },
+  { id: "suivi-imprecis",      label: "Suivi colis peu fiable ou imprécis" },
   { id: "plage-large",         label: "Plages de livraison trop larges" },
+  { id: "retard",              label: "Retard significatif" },
+  { id: "colis-perdu",         label: "Colis déclaré perdu" },
+  { id: "colis-non-livre",     label: "Colis déclaré livré, mais non livré" },
+  { id: "lieu-sur",            label: "Dépôt en \"lieu sûr\" sans accord préalable" },
+  { id: "relais-force",        label: "Colis prévu domicile, mais livré dans un relais" },
   { id: "relais-ferme",        label: "Point relais fermé ou saturé" },
-  { id: "service-client",      label: "Service client difficile à joindre" },
-  { id: "remboursement",       label: "Remboursements lents ou refusés" },
-  { id: "retour-complique",    label: "Procédure de retour trop compliquée" },
-  { id: "notification",        label: "Notifications de livraison absentes ou tardives" },
+  { id: "mauvais-relais",      label: "Livré dans mauvais point relais" },
   { id: "livreur-attitude",    label: "Comportement du livreur" },
-  { id: "consigne-absent",     label: "Dépôt en lieu sûr sans accord préalable" },
+  { id: "emballage-degrade",   label: "Emballage livré dégradé" },
+  { id: "service-client",      label: "Service client difficile à joindre" },
 ];
 
 export const POINTS_NEGATIFS_PRO = [
-  { id: "retard-envoi",        label: "Retards d'enlèvement ou de livraison" },
-  { id: "tarifs-opaques",      label: "Tarifs peu transparents ou hausses fréquentes" },
-  { id: "facturation-erreur",  label: "Erreurs de facturation récurrentes" },
-  { id: "poids-volu",          label: "Application abusive du poids volumétrique" },
-  { id: "suivi-pro",           label: "Suivi et traçabilité insuffisants" },
-  { id: "casse-envoi",         label: "Colis endommagés ou pertes fréquentes" },
   { id: "interlocuteur",       label: "Interlocuteur commercial peu réactif" },
+  { id: "reclamation",         label: "Mauvaise gestion des réclamations" },
+  { id: "enlevement",          label: "Problèmes lors des enlèvements" },
+  { id: "casse-envoi",         label: "Colis endommagés ou pertes fréquentes" },
+  { id: "delais-longs",        label: "Délais de livraison trop longs" },
+  { id: "retards",             label: "Retards dans les livraisons" },
+  { id: "dedouanement",        label: "Problèmes de dédouanement" },
+  { id: "suivi-pro",           label: "Suivi et traçabilité insuffisants" },
   { id: "api-outils",          label: "Outils digitaux / API peu performants" },
-  { id: "reclamation",         label: "Gestion des réclamations trop lente" },
-  { id: "contrat-negocia",     label: "Peu de flexibilité en négociation contractuelle" },
+  { id: "tarifs-opaques",      label: "Tarifs peu transparents / complexes" },
+  { id: "supplements",         label: "Trop de suppléments" },
+  { id: "poids-volu",          label: "Impact du poids volumétrique" },
+  { id: "facturation-erreur",  label: "Erreurs de facturation récurrentes" },
   { id: "eco-pro",             label: "Manque d'engagement environnemental" },
-  { id: "international-docs",  label: "Complexité des documents douaniers" },
 ];

@@ -22,13 +22,25 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
           <p style={{ fontSize: 13, color: "var(--text2)", textAlign: "center", marginBottom: 40 }}>
             Les questions s'adaptent à votre profil.
           </p>
+          <div style={{
+            display: "flex", alignItems: "center", gap: 10,
+            padding: "10px 16px", marginBottom: 32,
+            background: "rgba(200,169,110,0.06)",
+            border: "1px solid rgba(200,169,110,0.2)",
+            borderRadius: 4,
+          }}>
+            <span style={{ fontSize: 16, flexShrink: 0 }}>🚚</span>
+            <p style={{ fontSize: 12, color: "var(--text2)", lineHeight: 1.6 }}>
+              Les transporteurs doivent voter en tant que <strong style={{ color: "var(--text)" }}>particulier et non en tant que professionnel expéditeur !</strong>
+            </p>
+          </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
             {([
               {
                 id: "pro" as Profile,
                 icon: "💼",
-                title: "Professionnel",
+                title: "Professionnel Expéditeur",
                 description: "Les votants devront renseigner leur email professionnel.",
               },
               {
@@ -53,7 +65,6 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
               >
                 <div style={{ fontSize: 32, marginBottom: 16 }}>{p.icon}</div>
                 <div className="serif" style={{ fontSize: 22, color: "var(--text)", marginBottom: 4, fontWeight: 400 }}>{p.title}</div>
-                <div className="serif" style={{ fontSize: 14, color: "var(--text)", marginBottom: 4, fontWeight: 400 }}>{p.description}</div>
               </motion.button>
             ))}
           </div>

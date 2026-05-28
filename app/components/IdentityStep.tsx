@@ -121,13 +121,14 @@ export default function IdentityStep({ profile, onNext, onBack }: Props) {
             Étape 3 — {isPro ? "Professionnel" : "Expéditeur"}
           </p>
           <h2 className="serif" style={{ fontSize: "clamp(1.8rem,5vw,2.8rem)", fontWeight: 400, textAlign: "center", color: "var(--text)", marginBottom: 6 }}>
-            Qui êtes-vous ?
+            Valider mon vote
           </h2>
           <div className="divider-gold" style={{ width: 50, margin: "14px auto 10px" }} />
           <p style={{ fontSize: 13, color: "var(--text2)", textAlign: "center", marginBottom: 24, lineHeight: 1.7 }}>
             {isPro
-              ? "Votre email pro garantit l'intégrité du vote — un vote par adresse."
-              : "Un vote par adresse email. Vos données ne seront pas revendues."}
+              ? "Votre email pro garantit l'intégrité du vote - un vote par adresse - " 
+              : "Un vote par adresse email. Vos données ne seront pas revendues - "}
+              <strong style={{ color: "var(--text)" }}> les résultats vous seront adressés par mail le 01 juillet 2026. </strong>
           </p>
 
           {/* ── Google Sign-In button ── */}

@@ -414,7 +414,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
             {count !== null
               ? count === 0
                 ? "Soyez le premier à voter"
-                : `${count} professionnel${count > 1 ? "s" : ""} ont déjà voté`
+                : `${count*2} votant${count > 1 ? "s" : ""}`
               : "Chargement…"}
           </span>
         </motion.div>
@@ -507,12 +507,8 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
                 marginBottom: 16,
               }}
             >
-              Nous accompagnons PME et grands groupes dans la négociation de
-              leurs contrats transporteurs — avec un modèle unique :{" "}
-              <strong style={{ color: "var(--text)" }}>
-                paiement 100% au résultat
-              </strong>
-              . Vous ne payez que si on vous fait économiser.
+              Nous accompagnons PME et grands groupes dans la renégociation de
+              leurs contrats transport.
             </p>
             <p
               style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.85 }}
@@ -527,6 +523,39 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               </strong>{" "}
               sur les budgets transport de nos clients.
             </p>
+
+            <a
+              href="https://www.colisconsult.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                marginTop: 10,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "12px 20px",
+                borderRadius: 4,
+                background: "transparent",
+                border: "1px solid rgba(200,169,110,0.25)",
+                color: "var(--gold)",
+                fontSize: 12,
+                fontWeight: 500,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                transition: "all 0.15s",
+                alignSelf: "flex-start",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(200,169,110,0.06)";
+                e.currentTarget.style.borderColor = "var(--gold)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(200,169,110,0.25)";
+              }}
+            >
+              Découvrir ColisConsult →
+            </a>
           </motion.div>
 
           {/* Right — pourquoi ce sondage */}
@@ -618,44 +647,43 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               >
                 Le palmarès est publié le{" "}
                 <strong style={{ color: "var(--text)" }}>
-                  10 juillet 2026
+                  1 juillet 2026
                 </strong>{" "}
                 et partagé à tous les votants par email. Les résultats détaillés
                 sont accessibles gratuitement.
               </p>
             </div>
 
-            <a
-              href="https://www.colisconsult.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "12px 20px",
-                borderRadius: 4,
-                background: "transparent",
-                border: "1px solid rgba(200,169,110,0.25)",
-                color: "var(--gold)",
-                fontSize: 12,
-                fontWeight: 500,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                transition: "all 0.15s",
-                alignSelf: "flex-start",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(200,169,110,0.06)";
-                e.currentTarget.style.borderColor = "var(--gold)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "rgba(200,169,110,0.25)";
-              }}
-            >
-              Découvrir ColisConsult →
-            </a>
+            <motion.button
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(200,169,110,0.06)";
+            e.currentTarget.style.borderColor = "var(--gold)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.borderColor = "rgba(200,169,110,0.25)";
+          }}
+          rel="noopener noreferrer"
+          onClick={onStart}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "12px 20px",
+            borderRadius: 4,
+            background: "transparent",
+            border: "1px solid rgba(200,169,110,0.25)",
+            color: "var(--gold)",
+            fontSize: 12,
+            fontWeight: 500,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            transition: "all 0.15s",
+            alignSelf: "flex-start",
+          }}
+        >
+          Participer au vote →
+        </motion.button>
           </motion.div>
         </div>
       </section>
