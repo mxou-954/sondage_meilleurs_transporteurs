@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.montransporteurprefere.com"),
   title: {
-    default: "Mon Transporteur Préféré.com | Élection | ColisConsult",
+    default: "MonTransporteurPréféré.com | Élection | By ColisConsult",
     template: "%s | Mon Transporteur Préféré",
   },
   description:
