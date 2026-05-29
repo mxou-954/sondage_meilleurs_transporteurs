@@ -199,7 +199,10 @@ export default function DoneStep({
           </div>
 
           {/* Recap */}
-          {voted.length > 0 && (
+          {/* Recap unifié */}
+          {(voted.length > 0 ||
+            (avis && Object.keys(avis).length > 0) ||
+            (pointsNegatifs && pointsNegatifs.length > 0)) && (
             <div
               style={{
                 borderRadius: 4,
@@ -207,6 +210,27 @@ export default function DoneStep({
                 border: "1px solid rgba(200,169,110,0.15)",
               }}
             >
+              {/* Header */}
+              <div
+                style={{
+                  padding: "8px 14px",
+                  background: "rgba(200,169,110,0.05)",
+                  borderBottom: "1px solid rgba(200,169,110,0.1)",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: 10,
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
+                  }}
+                >
+                  Rappel de vos choix
+                </span>
+              </div>
+
+              {/* Vote principal */}
               {voted.map((q, i) => {
                 const t = q.transporteurs.find((tr) => tr.id === votes[q.id]);
                 return (
@@ -218,12 +242,8 @@ export default function DoneStep({
                       justifyContent: "space-between",
                       gap: 8,
                       padding: "10px 14px",
-                      background:
-                        i % 2 === 0 ? "var(--bg2)" : "rgba(255,255,255,0.015)",
-                      borderBottom:
-                        i < voted.length - 1
-                          ? "1px solid rgba(255,255,255,0.04)"
-                          : "none",
+                      background: "rgba(255,255,255,0.02)",
+                      borderBottom: "1px solid rgba(255,255,255,0.04)",
                     }}
                   >
                     <span
@@ -233,151 +253,95 @@ export default function DoneStep({
                         flexShrink: 0,
                       }}
                     >
-                      Votre transporteur préféré
+                      Transporteur préféré
                     </span>
                     <span
                       className="serif"
-                      style={{
-                        fontSize: 13,
-                        color: "var(--gold2)",
-                        textAlign: "right",
-                      }}
+                      style={{ fontSize: 13, color: "var(--gold2)" }}
                     >
                       {t?.nom}
                     </span>
                   </div>
                 );
               })}
-            </div>
-          )}
 
-          {/* Avis recap */}
-          {avis && Object.keys(avis).length > 0 && (
-            <div
-              style={{
-                borderRadius: 4,
-                overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.06)",
-              }}
-            >
-              <div
-                style={{
-                  padding: "6px 14px",
-                  background: "rgba(255,255,255,0.02)",
-                  borderBottom: "1px solid rgba(255,255,255,0.04)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: 10,
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "var(--text3)",
-                  }}
-                >
-                  Rappel de vos choix
-                </span>
-              </div>
-              {Object.entries(avis).map(([tId, sentiment], i) => {
-                const transporteur = questions
-                  .flatMap((q) => q.transporteurs)
-                  .find((t) => t.id === tId);
-                const emoji =
-                  sentiment === "good"
-                    ? "😊"
-                    : sentiment === "neutral"
-                      ? "😐"
-                      : "😞";
-                const entries = Object.entries(avis);
-                return (
-                  <div
-                    key={tId}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      gap: 8,
-                      padding: "8px 14px",
-                      background:
-                        i % 2 === 0 ? "var(--bg2)" : "rgba(255,255,255,0.01)",
-                      borderBottom:
-                        i < entries.length - 1
-                          ? "1px solid rgba(255,255,255,0.03)"
-                          : "none",
-                    }}
-                  >
-                    <span style={{ fontSize: 12, color: "var(--text3)" }}>
-                      {transporteur?.nom ?? tId}
-                    </span>
-                    <span style={{ fontSize: 16, lineHeight: 1 }}>{emoji}</span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          {/* Points négatifs recap */}
-          {pointsNegatifs && pointsNegatifs.length > 0 && (
-            <div
-              style={{
-                borderRadius: 4,
-                overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.06)",
-              }}
-            >
-              <div
-                style={{
-                  padding: "6px 14px",
-                  background: "rgba(255,255,255,0.02)",
-                  borderBottom: "1px solid rgba(255,255,255,0.04)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: 10,
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "var(--text3)",
-                  }}
-                >
-                  Points à améliorer
-                </span>
-              </div>
-              {pointsNegatifs.map((pId, i) => {
-                const allPoints = [
-                  ...POINTS_NEGATIFS_PRO,
-                  ...POINTS_NEGATIFS_CLIENT,
-                ];
-                const point = allPoints.find((p) => p.id === pId);
-                return (
-                  <div
-                    key={pId}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 8,
-                      padding: "8px 14px",
-                      background:
-                        i % 2 === 0 ? "var(--bg2)" : "rgba(255,255,255,0.01)",
-                      borderBottom:
-                        i < pointsNegatifs.length - 1
-                          ? "1px solid rgba(255,255,255,0.03)"
-                          : "none",
-                    }}
-                  >
-                    <span style={{ fontSize: 12, flexShrink: 0 }}>⚡</span>
-                    <span
+              {/* Avis */}
+              {avis &&
+                Object.entries(avis).map(([tId, sentiment], i) => {
+                  const transporteur = questions
+                    .flatMap((q) => q.transporteurs)
+                    .find((t) => t.id === tId);
+                  const emoji =
+                    sentiment === "good"
+                      ? "😊"
+                      : sentiment === "neutral"
+                        ? "😐"
+                        : "😞";
+                  return (
+                    <div
+                      key={tId}
                       style={{
-                        fontSize: 12,
-                        color: "var(--text3)",
-                        lineHeight: 1.4,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 8,
+                        padding: "8px 14px",
+                        background:
+                          i % 2 === 0
+                            ? "rgba(255,255,255,0.015)"
+                            : "rgba(255,255,255,0.008)",
+                        borderBottom: "1px solid rgba(255,255,255,0.03)",
                       }}
                     >
-                      {point?.label ?? pId}
-                    </span>
-                  </div>
-                );
-              })}
+                      <span style={{ fontSize: 12, color: "var(--text3)" }}>
+                        {transporteur?.nom ?? tId}
+                      </span>
+                      <span style={{ fontSize: 15, lineHeight: 1 }}>
+                        {emoji}
+                      </span>
+                    </div>
+                  );
+                })}
+
+              {/* Points négatifs */}
+              {pointsNegatifs &&
+                pointsNegatifs.map((pId, i) => {
+                  const allPoints = [
+                    ...POINTS_NEGATIFS_PRO,
+                    ...POINTS_NEGATIFS_CLIENT,
+                  ];
+                  const point = allPoints.find((p) => p.id === pId);
+                  return (
+                    <div
+                      key={pId}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        padding: "8px 14px",
+                        background:
+                          i % 2 === 0
+                            ? "rgba(255,255,255,0.015)"
+                            : "rgba(255,255,255,0.008)",
+                        borderBottom:
+                          i < pointsNegatifs.length - 1
+                            ? "1px solid rgba(255,255,255,0.03)"
+                            : "none",
+                      }}
+                    >
+                      <span style={{ fontSize: 11, flexShrink: 0 }}>⚡</span>
+                      <span
+                        style={{
+                          fontSize: 12,
+                          color: "var(--text3)",
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {point?.label ?? pId}
+                      </span>
+                    </div>
+                  );
+                })}
             </div>
           )}
 
