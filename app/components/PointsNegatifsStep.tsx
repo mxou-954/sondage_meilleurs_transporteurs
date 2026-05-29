@@ -45,11 +45,11 @@ export default function PointsNegatifsStep({ onNext, onSkip, onBack, stepLabel, 
 
             {profile === "pro" ? (
               <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
-                Quels problèmes avez-vous rencontrés avec vos livraisons ?
+                Quelles sont vos principales critiques vis-à-vis de vos transporteurs ?
               </h2>
             ) : (
               <h2 className="serif" style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.4, marginBottom: 8 }}>
-                Quelles sont vos principales critiques vis-à-vis de vos transporteurs ?
+                Quels problèmes avez-vous rencontrés avec vos livraisons ?
               </h2>
             )}
             <div className="divider-gold" style={{ width: 40, margin: "16px 0 8px" }} />
