@@ -74,6 +74,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <head>
+        /**
+         * Mon Transporteur Préféré — Élection S1 2026
+         * 
+         * Conçu et développé pour ColisConsult par Maxime Courbeyrette | mcourbeyrette@gmail.com
+         * Cabinet expert en appels d'offres transport colis & palettes
+         * 
+         * © 2026 ColisConsult · https://www.colisconsult.com
+         * Contact : Matthieu Erly · matthieu@colisconsult.com
+         */
+        
         <script src="https://accounts.google.com/gsi/client" async></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
