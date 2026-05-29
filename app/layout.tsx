@@ -4,11 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.montransporteurprefere.com"),
   title: {
-    default: "Mon Transporteur Préféré — Élection S1 2026 | ColisConsult",
+    default: "Mon Transporteur Préféré.com | Élection | ColisConsult",
     template: "%s | Mon Transporteur Préféré",
   },
   description:
-    "Votez pour le meilleur transporteur de l'année S1 2026. DHL, UPS, FedEx, Chronopost, Colissimo, DPD, GLS, Mondial Relay… Quel est le préféré des professionnels du transport et des expéditeurs ? Un sondage indépendant organisé par ColisConsult.",
+    "Votez, en tant que professionnel ou particulier, pour désigner le meilleur transporteur de colis. Choisissez parmi La Poste, Chronopost, Mondial Relay, DHL…",
   keywords: [
     "meilleur transporteur 2026",
     "transporteur préféré France",
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
         url: "/api/og",
         width: 1200,
         height: 630,
-        alt: "Mon Transporteur Préféré — Élection S1 2026 par ColisConsult",
+        alt: "Mon Transporteur Préféré.com | Élection | ColisConsult",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mon Transporteur Préféré — Élection S1 2026",
+    title: "Mon Transporteur Préféré.com | Élection | ColisConsult",
     description:
       "Votez pour le meilleur transporteur de l'année. Sondage indépendant par ColisConsult.",
     images: ["/api/og"],

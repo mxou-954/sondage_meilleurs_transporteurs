@@ -318,7 +318,7 @@ export default function DoneStep({
                         fontSize: 10,
                         letterSpacing: "0.15em",
                         textTransform: "uppercase",
-                        color: "var(--text3)",
+                        color: "var(--gold)",
                       }}
                     >
                       Vos préoccupations
