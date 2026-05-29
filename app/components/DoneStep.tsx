@@ -44,7 +44,7 @@ export default function DoneStep({
   const firstName = name.split(" ")[0] || "";
   const voted = questions.filter((q) => votes[q.id]);
 
-  const siteUrl = "https://vote.colisconsult.com";
+  const siteUrl = "https://www.montransporteurprefere.com";
   const shareText = `Je viens de voter pour le meilleur transporteur 🏆\nL'élection du meilleur transporteur par ColisConsult.\nVotez aussi : ${siteUrl}`;
   const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(siteUrl)}`;
 
@@ -62,7 +62,6 @@ export default function DoneStep({
         await navigator.share({
           title: "Best Carrier Award 2026",
           text: shareText,
-          url: siteUrl,
         });
       } catch {}
     }
@@ -304,44 +303,66 @@ export default function DoneStep({
                 })}
 
               {/* Points négatifs */}
-              {pointsNegatifs &&
-                pointsNegatifs.map((pId, i) => {
-                  const allPoints = [
-                    ...POINTS_NEGATIFS_PRO,
-                    ...POINTS_NEGATIFS_CLIENT,
-                  ];
-                  const point = allPoints.find((p) => p.id === pId);
-                  return (
-                    <div
-                      key={pId}
+              {pointsNegatifs && pointsNegatifs.length > 0 && (
+                <>
+                  <div
+                    style={{
+                      padding: "6px 14px",
+                      background: "rgba(255,255,255,0.02)",
+                      borderTop: "1px solid rgba(255,255,255,0.04)",
+                      borderBottom: "1px solid rgba(255,255,255,0.04)",
+                    }}
+                  >
+                    <span
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        padding: "8px 14px",
-                        background:
-                          i % 2 === 0
-                            ? "rgba(255,255,255,0.015)"
-                            : "rgba(255,255,255,0.008)",
-                        borderBottom:
-                          i < pointsNegatifs.length - 1
-                            ? "1px solid rgba(255,255,255,0.03)"
-                            : "none",
+                        fontSize: 10,
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        color: "var(--text3)",
                       }}
                     >
-                      <span style={{ fontSize: 11, flexShrink: 0 }}>⚡</span>
-                      <span
+                      Vos préoccupations
+                    </span>
+                  </div>
+                  {pointsNegatifs.map((pId, i) => {
+                    const allPoints = [
+                      ...POINTS_NEGATIFS_PRO,
+                      ...POINTS_NEGATIFS_CLIENT,
+                    ];
+                    const point = allPoints.find((p) => p.id === pId);
+                    return (
+                      <div
+                        key={pId}
                         style={{
-                          fontSize: 12,
-                          color: "var(--text3)",
-                          lineHeight: 1.4,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          padding: "8px 14px",
+                          background:
+                            i % 2 === 0
+                              ? "rgba(255,255,255,0.015)"
+                              : "rgba(255,255,255,0.008)",
+                          borderBottom:
+                            i < pointsNegatifs.length - 1
+                              ? "1px solid rgba(255,255,255,0.03)"
+                              : "none",
                         }}
                       >
-                        {point?.label ?? pId}
-                      </span>
-                    </div>
-                  );
-                })}
+                        <span style={{ fontSize: 11, flexShrink: 0 }}>⚡</span>
+                        <span
+                          style={{
+                            fontSize: 12,
+                            color: "var(--text3)",
+                            lineHeight: 1.4,
+                          }}
+                        >
+                          {point?.label ?? pId}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
           )}
 
@@ -534,7 +555,7 @@ export default function DoneStep({
                   marginBottom: 12,
                 }}
               >
-                Réduisez vos coûts transport de 3 à 22 %
+                Envie d'échanger sur vos enjeux transport avec un expert indépendant ?
               </h3>
               <p
                 style={{
@@ -543,59 +564,20 @@ export default function DoneStep({
                   lineHeight: 1.75,
                 }}
               >
-                ColisConsult renégocie vos contrats transporteurs. Paiement{" "}
+                Prenez rendez-vous avec {" "}
+                <a href="https://www.linkedin.com/in/matthieuerly/" target="_blank">
                 <strong style={{ color: "var(--text)" }}>
-                  100% au résultat
-                </strong>{" "}
-                — vous ne payez que si on vous fait économiser.
+                  Matthieu Erly
+                </strong>
+                </a>{" "}
+                le directeur du cabinet {" "}
+                <a href="https://www.colisconsult.com/" target="_blank">
+                <strong style={{ color: "var(--text)" }}>
+                ColisConsult
+                </strong>
+                </a>
               </p>
             </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: "50%",
-                    background: "var(--gold)",
-                    flexShrink: 0,
-                  }}
-                />
-                <span style={{ fontSize: 12, color: "var(--text2)" }}>
-                  Audit gratuit et sans engagement
-                </span>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: "50%",
-                    background: "var(--gold)",
-                    flexShrink: 0,
-                  }}
-                />
-                <span style={{ fontSize: 12, color: "var(--text2)" }}>
-                  Résultats en 3 à 6 semaines
-                </span>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: "50%",
-                    background: "var(--gold)",
-                    flexShrink: 0,
-                  }}
-                />
-                <span style={{ fontSize: 12, color: "var(--text2)" }}>
-                  +150 entreprises accompagnées
-                </span>
-              </div>
-            </div>
-
             <a
               href="https://calendly.com/matthieu-erly"
               target="_blank"
@@ -628,18 +610,9 @@ export default function DoneStep({
                   "0 0 24px rgba(200,169,110,0.25)";
               }}
             >
-              Réduire vos coûts
+              CALENDLY
             </a>
 
-            <p
-              style={{
-                fontSize: 11,
-                color: "var(--text3)",
-                textAlign: "center",
-              }}
-            >
-              Pré-audit gratuit & sans engagement
-            </p>
           </motion.div>
         )}
       </div>

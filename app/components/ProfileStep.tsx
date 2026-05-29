@@ -31,7 +31,7 @@ export default function ProfileStep({ onSelect, onBack }: Props) {
           }}>
             <span style={{ fontSize: 16, flexShrink: 0 }}>🚚</span>
             <p style={{ fontSize: 12, color: "var(--text2)", lineHeight: 1.6 }}>
-              Les transporteurs doivent voter en tant que <strong style={{ color: "var(--text)" }}>particulier et non en tant que professionnel expéditeur !</strong>
+              Les transporteurs doivent voter en tant que particulier et non en tant que professionnel expéditeur !
             </p>
           </div>
 
