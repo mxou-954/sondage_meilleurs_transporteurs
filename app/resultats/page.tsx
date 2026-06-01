@@ -710,7 +710,7 @@ export default function ResultatsPage() {
                         outerRadius={80}
                         dataKey="value"
                         label={({ name, percent }) =>
-                          `${name} ${Math.round(percent * 100)}%`
+                          `${name} ${Math.round((percent ?? 0) * 100)}%`
                         }
                         labelLine={false}
                       >
@@ -953,17 +953,7 @@ export default function ResultatsPage() {
                         content={<CustomTooltip />}
                         cursor={{ fill: "rgba(200,169,110,0.05)" }}
                       />
-                      <Bar
-                        dataKey="value"
-                        radius={[0, 4, 4, 0]}
-                        label={{
-                          position: "right",
-                          fill: "#A8A4B8",
-                          fontSize: 11,
-                          formatter: (v: number, entry: any) =>
-                            `${entry?.pct ?? ""}%`,
-                        }}
-                      >
+                      <Bar dataKey="value" radius={[0, 4, 4, 0]}>
                         {getDetailedVoteData(
                           stats.pros,
                           QUESTIONS_PRO[0]?.id,
@@ -1108,17 +1098,7 @@ export default function ResultatsPage() {
                         content={<CustomTooltip />}
                         cursor={{ fill: "rgba(200,169,110,0.05)" }}
                       />
-                      <Bar
-                        dataKey="value"
-                        radius={[0, 4, 4, 0]}
-                        label={{
-                          position: "right",
-                          fill: "#A8A4B8",
-                          fontSize: 11,
-                          formatter: (v: number, entry: any) =>
-                            `${entry?.pct ?? ""}%`,
-                        }}
-                      >
+                      <Bar dataKey="value" radius={[0, 4, 4, 0]}>
                         {getDetailedVoteData(
                           stats.clients,
                           QUESTIONS_CLIENT[0]?.id,
@@ -1175,18 +1155,7 @@ export default function ResultatsPage() {
                         content={<CustomTooltip />}
                         cursor={{ fill: "rgba(200,169,110,0.05)" }}
                       />
-                      <Bar
-                        dataKey="value"
-                        fill={GOLD}
-                        radius={[0, 4, 4, 0]}
-                        label={{
-                          position: "right",
-                          fill: "#A8A4B8",
-                          fontSize: 11,
-                          formatter: (v: number, entry: any) =>
-                            `${entry?.pct ?? ""}%`,
-                        }}
-                      />
+                      <Bar dataKey="value" fill={GOLD} radius={[0, 4, 4, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -1222,18 +1191,7 @@ export default function ResultatsPage() {
                         content={<CustomTooltip />}
                         cursor={{ fill: "rgba(200,169,110,0.05)" }}
                       />
-                      <Bar
-                        dataKey="value"
-                        fill={GOLD2}
-                        radius={[0, 4, 4, 0]}
-                        label={{
-                          position: "right",
-                          fill: "#A8A4B8",
-                          fontSize: 11,
-                          formatter: (v: number, entry: any) =>
-                            `${entry?.pct ?? ""}%`,
-                        }}
-                      />
+                      <Bar dataKey="value" fill={GOLD2} radius={[0, 4, 4, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
