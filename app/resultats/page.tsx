@@ -149,18 +149,28 @@ export default function ResultatsPage() {
   const proVoters = voters.filter((v) => v.profile === "pro");
   const clientVoters = voters.filter((v) => v.profile === "client");
 
-  const getVoteData = (questionId: string, questions: typeof QUESTIONS_PRO) => {
-    const q = questions.find((q) => q.id === questionId);
-    if (!q) return [];
-    const raw = data?.results[questionId] ?? {};
-    const total = Object.values(raw).reduce((a, b) => a + b, 0);
-    return q.transporteurs
-      .map((t) => ({
-        name: t.nom,
-        value: raw[t.id] ?? 0,
-        pct: total > 0 ? Math.round(((raw[t.id] ?? 0) / total) * 100) : 0,
-      }))
-      .filter((d) => d.value > 0)
+  const getVoteData = (questionId: string) => {
+    const allTransporteurs = [...QUESTIONS_PRO, ...QUESTIONS_CLIENT].flatMap(
+      (q) => q.transporteurs,
+    );
+
+    const counts: Record<string, number> = {};
+    voters.forEach((v) => {
+      const vote = v.votes[questionId];
+      if (vote) counts[vote] = (counts[vote] ?? 0) + 1;
+    });
+
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+
+    return Object.entries(counts)
+      .map(([tId, value]) => {
+        const t = allTransporteurs.find((t) => t.id === tId);
+        return {
+          name: t?.nom ?? tId,
+          value,
+          pct: total > 0 ? Math.round((value / total) * 100) : 0,
+        };
+      })
       .sort((a, b) => b.value - a.value);
   };
 
@@ -208,8 +218,8 @@ export default function ResultatsPage() {
       .sort((a, b) => b.good - a.good);
   };
 
-  const proData = getVoteData(QUESTIONS_PRO[0]?.id, QUESTIONS_PRO);
-  const clientData = getVoteData(QUESTIONS_CLIENT[0]?.id, QUESTIONS_CLIENT);
+  const proData = getVoteData(QUESTIONS_PRO[0]?.id);
+  const clientData = getVoteData(QUESTIONS_CLIENT[0]?.id);
   const negPro = getPointsData("pro");
   const negClient = getPointsData("client");
   const avisData = getAvisData();
