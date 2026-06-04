@@ -557,7 +557,7 @@ export default function ResultatsPage() {
               textDecoration: "none",
             }}
           >
-            ↓ Export CSV
+            ↓ Export JSON
           </a>
           <Link
             href="/"

@@ -55,6 +55,15 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
         background: "var(--bg)",
       }}
     >
+      {/**
+       * Mon Transporteur Préféré — Élection S1 2026
+       *
+       * Conçu et développé pour ColisConsult par Maxime Courbeyrette | mcourbeyrette@gmail.com
+       * Cabinet expert en appels d'offres transport colis & palettes
+       *
+       * © 2026 ColisConsult · https://www.colisconsult.com
+       * Contact : Matthieu Erly · matthieu@colisconsult.com
+       */}
       {/* ── NAV ── */}
       <nav
         style={{
@@ -223,7 +232,8 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               textAlign: "center",
             }}
           >
-            L&apos;élection du meilleur transporteur par les expéditeurs professionnels et par les particuliers e-consommateurs
+            L&apos;élection du meilleur transporteur par les expéditeurs
+            professionnels et par les particuliers e-consommateurs
           </p>
 
           <div
@@ -414,7 +424,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
             {count !== null
               ? count === 0
                 ? "Soyez le premier à voter"
-                : `${count*2} votant${count > 1 ? "s" : ""}`
+                : `${count * 2} votant${count > 1 ? "s" : ""}`
               : "Chargement…"}
           </span>
         </motion.div>
@@ -457,7 +467,6 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            
             <p
               style={{
                 fontSize: 11,
@@ -496,8 +505,16 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               }}
             >
               ColisConsult est le cabinet de conseil indépendant de référence en
-              achat transport colis et palettes en France, fondé en 2005 par 
-              <a href="https://www.linkedin.com/in/matthieuerly/"><strong style={{ color: "var(--text)", textDecoration: "underline" }}> Matthieu Erly</strong></a>.
+              achat transport colis et palettes en France, fondé en 2005 par
+              <a href="https://www.linkedin.com/in/matthieuerly/">
+                <strong
+                  style={{ color: "var(--text)", textDecoration: "underline" }}
+                >
+                  {" "}
+                  Matthieu Erly
+                </strong>
+              </a>
+              .
             </p>
             <p
               style={{
@@ -633,44 +650,42 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
                 style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.8 }}
               >
                 Le palmarès est publié le{" "}
-                <strong style={{ color: "var(--text)" }}>
-                  1 juillet 2026
-                </strong>{" "}
+                <strong style={{ color: "var(--text)" }}>1 juillet 2026</strong>{" "}
                 et partagé à tous les votants par email. Les résultats détaillés
                 sont accessibles gratuitement.
               </p>
             </div>
 
             <motion.button
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(200,169,110,0.06)";
-            e.currentTarget.style.borderColor = "var(--gold)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.borderColor = "rgba(200,169,110,0.25)";
-          }}
-          rel="noopener noreferrer"
-          onClick={onStart}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "12px 20px",
-            borderRadius: 4,
-            background: "transparent",
-            border: "1px solid rgba(200,169,110,0.25)",
-            color: "var(--gold)",
-            fontSize: 12,
-            fontWeight: 500,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            transition: "all 0.15s",
-            alignSelf: "flex-start",
-          }}
-        >
-          Participer au vote →
-        </motion.button>
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(200,169,110,0.06)";
+                e.currentTarget.style.borderColor = "var(--gold)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "rgba(200,169,110,0.25)";
+              }}
+              rel="noopener noreferrer"
+              onClick={onStart}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "12px 20px",
+                borderRadius: 4,
+                background: "transparent",
+                border: "1px solid rgba(200,169,110,0.25)",
+                color: "var(--gold)",
+                fontSize: 12,
+                fontWeight: 500,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                transition: "all 0.15s",
+                alignSelf: "flex-start",
+              }}
+            >
+              Participer au vote →
+            </motion.button>
           </motion.div>
         </div>
       </section>
@@ -680,18 +695,65 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
         <div className="divider-gold" />
       </div>
 
+      {/* ── PARTENAIRES MÉDIAS ── */}
       {/* ── FOOTER ── */}
       <footer
         style={{
-          padding: "24px",
+          padding: "32px 24px",
           borderTop: "1px solid rgba(255,255,255,0.04)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 8,
+          gap: 16,
           textAlign: "center",
         }}
       >
+        {/* Partenaires médias */}
+        <div>
+          <p
+            style={{
+              fontSize: 10,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "var(--text3)",
+              marginBottom: 16,
+            }}
+          >
+            Partenaires médias
+          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: 32,
+            }}
+          >
+            <a
+              href="https://www.strategieslogistique.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ opacity: 0.5, transition: "opacity 0.2s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.5")}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logos/strategie_logistique.png"
+                alt="Stratégies Logistique"
+                style={{ height: 28, width: "auto" }}
+              />
+            </a>
+            {/* Ajoutez d'autres logos ici */}
+          </div>
+        </div>
+
+        <div
+          style={{ width: 40, height: 1, background: "rgba(255,255,255,0.06)" }}
+        />
+
+        {/* Branding */}
         <span
           className="serif"
           style={{
@@ -705,11 +767,12 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
         <span style={{ fontSize: 11, color: "var(--text3)" }}>
           © 2026 · Tous droits réservés
         </span>
+
+        {/* Liens */}
         <div
           style={{
             display: "flex",
             gap: 20,
-            marginTop: 4,
             flexWrap: "wrap",
             justifyContent: "center",
           }}
