@@ -89,7 +89,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
             letterSpacing: "0.12em",
           }}
         >
-          Mon transporteur préféré S1 2026
+          Mon transporteur préféré 2026
         </span>
         <a
           href="https://www.colisconsult.com"
@@ -157,7 +157,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
             marginBottom: 20,
           }}
         >
-          1ère Édition · Semestre 1 - 2026
+          1ère Édition · 2026
         </motion.p>
 
         {/* Trophy */}
@@ -649,8 +649,8 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
               <p
                 style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.8 }}
               >
-                Le palmarès est publié le{" "}
-                <strong style={{ color: "var(--text)" }}>1 juillet 2026</strong>{" "}
+                Le palmarès est publié{" "}
+                <strong style={{ color: "var(--text)" }}>début janvier 2027</strong>{" "}
                 et partagé à tous les votants par email. Les résultats détaillés
                 sont accessibles gratuitement.
               </p>

@@ -55,8 +55,8 @@ export const QUESTIONS_CLIENT: Question[] = [
   },
 ];
 
-export const VOTE_DEADLINE = new Date("2026-06-30T23:59:59");
-export const ANNOUNCE_DATE = "1 juillet 2026";
+export const VOTE_DEADLINE = new Date("2026-12-31T23:59:59");
+export const ANNOUNCE_DATE = "début janvier 2027";
 
 export const POINTS_NEGATIFS_CLIENT = [
   { id: "suivi-imprecis",      label: "Suivi colis peu fiable ou imprécis" },

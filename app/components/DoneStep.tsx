@@ -191,8 +191,8 @@ export default function DoneStep({
               <p
                 style={{ fontSize: 13, color: "var(--text3)", lineHeight: 1.7 }}
               >
-                Résultats annoncés le{" "}
-                <span style={{ color: "var(--gold2)" }}>1 juillet 2026</span>.
+                Résultats annoncés{" "}
+                <span style={{ color: "var(--gold2)" }}>début janvier 2027</span>.
               </p>
             )}
           </div>
