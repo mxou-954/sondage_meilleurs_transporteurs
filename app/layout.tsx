@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   publisher: "ColisConsult",
   category: "Transport & Logistique",
   openGraph: {
-    title: "Mon Transporteur Préféré — Élection S1 2026",
+    title: "Mon Transporteur Préféré",
     description:
       "DHL, UPS, Chronopost, Colissimo, DPD, GLS, Mondial Relay… Lequel mérite le titre ? Votez parmi les professionnels et expéditeurs. Sondage indépendant par ColisConsult.",
     url: "https://www.montransporteurprefere.com",
@@ -89,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: "Mon Transporteur Préféré",
               url: "https://www.montransporteurprefere.com",
               description:
-                "Élection du meilleur transporteur S1 2026 par les professionnels du transport et les expéditeurs. Un sondage indépendant organisé par ColisConsult.",
+                "Élection du meilleur transporteur 2026 par les professionnels du transport et les expéditeurs. Un sondage indépendant organisé par ColisConsult.",
               publisher: {
                 "@type": "Organization",
                 name: "ColisConsult",
