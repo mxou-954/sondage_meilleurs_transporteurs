@@ -545,7 +545,7 @@ export default function ResultatsPage() {
             letterSpacing: "0.12em",
           }}
         >
-          RÉSULTATS — S1 2026
+          RÉSULTATS — 2026
         </span>
         <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
           <a
