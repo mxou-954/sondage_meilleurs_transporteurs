@@ -56,7 +56,7 @@ export default function HomePage({ onStart }: { onStart: () => void }) {
       }}
     >
       {/**
-       * Mon Transporteur Préféré — Élection S1 2026
+       * Mon Transporteur Préféré — Élection 2026
        *
        * Conçu et développé pour ColisConsult par Maxime Courbeyrette | mcourbeyrette@gmail.com
        * Cabinet expert en appels d'offres transport colis & palettes
